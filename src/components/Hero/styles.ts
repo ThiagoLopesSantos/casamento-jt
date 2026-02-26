@@ -12,6 +12,7 @@ export const HeroImage = styled.img`
   max-width: 800px;
   width: 100%;
   height: 300px;
+  object-fit: cover;
 `
 
 export const Title = styled.h1`
