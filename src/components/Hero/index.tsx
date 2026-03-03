@@ -1,5 +1,5 @@
-import * as S from './styles';
-import gardem from "../../assets/images/gardem.png";
+import * as S from './styles'
+import gardem from '../../assets/images/gardem.png'
 
 const Hero = () => (
   <S.HeroContainer>
@@ -12,6 +12,6 @@ const Hero = () => (
       <S.Line></S.Line>
     </S.BtnConfirmContainer>
   </S.HeroContainer>
-);
+)
 
-export default Hero;
+export default Hero

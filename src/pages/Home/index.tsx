@@ -1,3 +1,4 @@
+import ContentSection from '../../components/ContentSection';
 import Hero from '../../components/Hero';
 import SectionDivider from '../../components/SectionDivider';
 
@@ -6,6 +7,7 @@ const Home = () => {
     <>
       <Hero />
       <SectionDivider />
+      <ContentSection />
     </>
   );
 };
