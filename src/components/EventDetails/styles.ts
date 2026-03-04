@@ -1,56 +1,88 @@
-import styled from 'styled-components';
-import { theme } from '../../styles/theme';
+import styled from 'styled-components'
+import { theme } from '../../styles/theme'
 
 export const DetailsContainer = styled.section`
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  gap: 5rem;
-  padding: 2rem;
-`;
+  text-align: center;
+  gap: 1.5rem;
+`
 
 export const InfoGroup = styled.div`
-  margin-bottom: 1.5rem;
+  width: 100%;
 
-  h3 {
-    color: ${theme.colors.primaryGreen};
-    margin-bottom: 0.5rem;
+  h2 {
+    margin-bottom: 1.5rem;
   }
 
   p {
     margin: 0.2rem 0;
     font-size: 0.95rem;
+    text-align: center;
+    line-height: 1.5rem;
   }
-`;
+`
+
 export const BtnRouteContainer = styled.div`
   display: flex;
   align-items: center;
-  justify-content: space-around;
 `
 
 export const RouteButton = styled.button`
   background-color: ${theme.colors.primaryGreen};
   color: white;
-  padding: 8px 20px;
+  width: 40%;
+  padding: 5px 8px;
   border-radius: 20px;
   display: flex;
   align-items: center;
   gap: 8px;
-  margin: 0 auto;
+  margin: 1.5rem auto;
   font-size: 0.9rem;
-`;
 
-export const GuideItem = styled.div`
   display: flex;
-  gap: 1rem;
-  align-items: flex-start;
-  margin-top: 1rem;
+  align-items: center;
+  justify-content: center;
 
-  img { width: 32px; } /* Para os ícones de relógio e vestido */
+  img {
+    width: 20px;
+  }
+
+  &:hover {
+    background-color: ${theme.colors.hoverGreen};
+  }
+`
+export const Line = styled.div`
+  width: 30%;
+  height: 0.1px;
+  background: ${theme.colors.secondaryGreen};
+`
+export const GuideItem = styled.div`
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  margin-top: 4rem;
+  justify-items: center;
+  align-items: center;
+
+  img {
+    width: 70px;
+    align-self: center;
+  }
+
+  #dress {
+    width: 150px;
+  }
 
   div {
-    strong { display: block; color: #333; }
-    p { font-size: 0.85rem; color: #666; }
+    strong {
+      display: block;
+      color: #333;
+    }
+    p {
+      font-size: 0.85rem;
+      color: #666;
+    }
   }
-`;
+`

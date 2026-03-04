@@ -7,8 +7,8 @@ export const AboutContainer = styled.section`
   gap: 1.5rem;
   text-align: center;
   justify-content: center;
-  border-right: 1px solid;
-  padding: 2rem;
+  border-right: 1px solid ${theme.colors.secondaryGreen};
+  padding: 0 2rem;
 `
 
 export const Title = styled.h2`
