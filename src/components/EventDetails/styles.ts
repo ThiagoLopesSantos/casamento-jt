@@ -66,6 +66,10 @@ export const GuideItem = styled.div`
   justify-items: center;
   align-items: center;
 
+  @media (max-width: 768px) {
+    grid-template-columns: 1fr;
+  }
+
   img {
     width: 70px;
     align-self: center;

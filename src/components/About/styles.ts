@@ -9,6 +9,13 @@ export const AboutContainer = styled.section`
   justify-content: center;
   border-right: 1px solid ${theme.colors.secondaryGreen};
   padding: 0 2rem;
+
+  @media (max-width: 768px) {
+    padding: 1.5rem;
+    border-right: none;
+    border-bottom: 1px solid ${theme.colors.secondaryGreen};
+    margin-bottom: 1.5rem;
+  }
 `
 
 export const Title = styled.h2`
