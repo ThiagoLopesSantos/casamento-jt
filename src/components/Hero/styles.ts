@@ -31,6 +31,10 @@ export const BtnConfirmContainer = styled.div`
   align-items: center;
   width: 100%;
   padding: 0 40px;
+
+  @media (max-width: 768px) {
+    padding: 1.5rem;
+  }
 `
 
 export const ConfirmButton = styled.button`
