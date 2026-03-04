@@ -32,10 +32,11 @@ export const BtnConfirmContainer = styled.div`
   width: 100%;
   padding: 0 40px;
 
+
   @media (max-width: 768px) {
     padding: 1.5rem;
   }
-`
+  `
 
 export const ConfirmButton = styled.button`
   background-color: ${theme.colors.primaryGreen};
@@ -45,7 +46,11 @@ export const ConfirmButton = styled.button`
   padding: 12px 40px;
   border-radius: 50px;
   font-weight: bold;
-`
+
+  &:hover {
+    background-color: ${theme.colors.hoverGreen};
+  }
+  `
 
 export const Line = styled.div`
   width: 40%;
