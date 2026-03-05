@@ -29,6 +29,21 @@ export const BtnRouteContainer = styled.div`
   display: flex;
   align-items: center;
 `
+export const InputRota = styled.input`
+  width: 80%;
+  padding: 10px;
+  margin-top: 15px;
+  border: 1px solid ${theme.colors.primaryGreen};
+  border-radius: 8px;
+  font-family: inherit;
+  font-size: 0.9rem;
+  outline: none;
+  background: ${theme.colors.background};
+
+  &:focus {
+    border-color: ${theme.colors.secondaryGreen};
+  }
+`;
 
 export const RouteButton = styled.button`
   background-color: ${theme.colors.primaryGreen};
