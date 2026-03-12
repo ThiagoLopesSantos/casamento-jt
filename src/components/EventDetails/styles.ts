@@ -77,7 +77,7 @@ export const Line = styled.div`
 export const GuideItem = styled.div`
   display: grid;
   grid-template-columns: 1fr 1fr;
-  margin-top: 4rem;
+  margin-top: 2rem;
   justify-items: center;
   align-items: center;
 
