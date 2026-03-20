@@ -23,7 +23,7 @@ export const PhotoItem = styled.img`
   object-fit: cover;
   border-radius: 10px;
   transition: transform 0.3s ease;
-
+  
   &:hover {
     transform: scale(1.03);
   }

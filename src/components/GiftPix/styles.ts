@@ -7,6 +7,10 @@ export const PixSection = styled.section`
   align-items: center;
   padding: 3rem 2rem;
   text-align: center;
+
+  p {
+    margin-bottom: 20px;
+  }
 `
 
 export const Title = styled.h2`
