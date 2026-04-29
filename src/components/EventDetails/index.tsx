@@ -15,7 +15,7 @@ const EventDetails: React.FC = () => {
       return;
     }
 
-    const destino = "Av. Gaspar de Lemos, 450, Ilha de Guaratiba, RJ";
+    const destino = "Casa das Pedras Festas e Eventos, Av. Gaspar de Lemos, 450 - Ilha de Guaratiba, Rio de Janeiro - RJ, 23020-110";
     // URL oficial do Google Maps para direções
     const url = `https://www.google.com/maps/dir/?api=1&origin=${encodeURIComponent(origem)}&destination=${encodeURIComponent(destino)}`;
 

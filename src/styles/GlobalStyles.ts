@@ -1,11 +1,14 @@
-import styled, { createGlobalStyle } from 'styled-components';
-import { theme } from './theme';
+import styled, { createGlobalStyle } from 'styled-components'
+import { theme } from './theme'
 
 export const GlobalStyle = createGlobalStyle`
   * {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
+  }
+  html {
+    scroll-behavior: smooth;
   }
 
   body {
@@ -32,5 +35,3 @@ export const MainContainer = styled.div`
   background-color: ${theme.colors.background};
   min-height: 100vh;
 `
-
-
