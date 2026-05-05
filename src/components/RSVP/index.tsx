@@ -131,7 +131,7 @@ const RSVP: React.FC = () => {
           </S.Description>
           <S.ButtonGroup>
             <S.SubmitButton onClick={() => setEtapa(3)}>Sim, com certeza! 😍</S.SubmitButton>
-            <button className="jump-link" onClick={finalizarConfirmacao}>Agora não, apenas confirmar</button>
+            <button className="jump-link" onClick={finalizarConfirmacao}>Sua presença já é nosso presente! Apenas Confirmar</button>
           </S.ButtonGroup>
         </S.StepBox>
       )}

@@ -37,7 +37,9 @@ export const SearchInput = styled.input`
   border: 2px solid ${theme.colors.secondaryGreen};
   font-size: 1rem;
   outline: none;
-  &:focus { border-color: ${theme.colors.primaryGreen}; }
+  &:focus {
+    border-color: ${theme.colors.primaryGreen};
+  }
 `
 
 export const ResultList = styled.div`
@@ -51,13 +53,18 @@ export const ResultList = styled.div`
 
 export const ResultItem = styled.div<{ $active?: boolean }>`
   padding: 15px;
-  background: ${props => props.$active ? theme.colors.primaryGreen : 'white'};
-  color: ${props => props.$active ? 'white' : theme.colors.primaryGreen};
+  background: ${(props) =>
+    props.$active ? theme.colors.primaryGreen : 'white'};
+  color: ${(props) => (props.$active ? 'white' : theme.colors.primaryGreen)};
   border: 1px solid ${theme.colors.secondaryGreen};
   border-radius: 12px;
   cursor: pointer;
   transition: all 0.2s;
-  &:hover { transform: translateX(5px); background: #f0f4eb; color: ${theme.colors.primaryGreen}; }
+  &:hover {
+    transform: translateX(5px);
+    background: #f0f4eb;
+    color: ${theme.colors.primaryGreen};
+  }
 `
 
 export const StepBox = styled.div`
@@ -78,8 +85,9 @@ export const ValueGrid = styled.div`
 
 export const ValueCard = styled.div<{ $active?: boolean }>`
   padding: 15px;
-  border: 2px solid ${props => props.$active ? theme.colors.primaryGreen : '#eee'};
-  background: ${props => props.$active ? '#f0f4eb' : 'white'};
+  border: 2px solid
+    ${(props) => (props.$active ? theme.colors.primaryGreen : '#eee')};
+  background: ${(props) => (props.$active ? '#f0f4eb' : 'white')};
   border-radius: 15px;
   cursor: pointer;
   font-weight: bold;
@@ -116,7 +124,10 @@ export const SubmitButton = styled.button`
   transition: 0.3s;
   width: 100%;
   max-width: 350px;
-  &:hover { opacity: 0.9; transform: scale(1.02); }
+  &:hover {
+    opacity: 0.9;
+    transform: scale(1.02);
+  }
 `
 
 export const ButtonGroup = styled.div`
@@ -126,7 +137,12 @@ export const ButtonGroup = styled.div`
   gap: 1rem;
   width: 100%;
   .jump-link {
-    background: none; border: none; color: #888; text-decoration: underline; cursor: pointer;
+    background: ${theme.colors.secondaryGreen};
+    border: none;
+    padding: 12px 30px;
+    color: #888;
+    text-decoration: underline;
+    cursor: pointer;
   }
 `
 
