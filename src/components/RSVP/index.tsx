@@ -16,17 +16,11 @@ function crc16(data: string): string {
     crc ^= data.charCodeAt(i) << 8
 
     for (let j = 0; j < 8; j++) {
-      crc =
-        (crc & 0x8000) !== 0
-          ? (crc << 1) ^ 0x1021
-          : crc << 1
+      crc = (crc & 0x8000) !== 0 ? (crc << 1) ^ 0x1021 : crc << 1
     }
   }
 
-  return (crc & 0xffff)
-    .toString(16)
-    .toUpperCase()
-    .padStart(4, '0')
+  return (crc & 0xffff).toString(16).toUpperCase().padStart(4, '0')
 }
 
 function gerarPayloadPix(
@@ -68,13 +62,11 @@ function gerarPayloadPix(
 }
 
 const RSVP: React.FC = () => {
-  const [etapa, setEtapa] =
-    useState<1 | 2 | 3 | 4 | 5 | 6>(1)
+  const [etapa, setEtapa] = useState<1 | 2 | 3 | 4 | 5 | 6>(1)
 
   const [nome, setNome] = useState('')
   const [celular, setCelular] = useState('')
-  const [valorSelecionado, setValorSelecionado] =
-    useState('R$ 20')
+  const [valorSelecionado, setValorSelecionado] = useState('R$ 20')
 
   const [copiado, setCopiado] = useState(false)
   const [contribuiu, setContribuiu] = useState(false)
@@ -90,18 +82,13 @@ const RSVP: React.FC = () => {
           CIDADE_RECEBEDOR
         )
 
-  const salvarPresenca = async (
-    presenca: 'Confirmado' | 'Cancelado'
-  ) => {
+  const salvarPresenca = async (presenca: 'Confirmado' | 'Cancelado') => {
     const formData = new FormData()
 
     formData.append('nome', nome)
     formData.append('celular', celular)
     formData.append('presenca', presenca)
-    formData.append(
-      'contribuiu',
-      contribuiu ? 'Sim' : 'Não'
-    )
+    formData.append('contribuiu', contribuiu ? 'Sim' : 'Não')
 
     await fetch(SCRIPT_URL, {
       method: 'POST',
@@ -160,39 +147,26 @@ const RSVP: React.FC = () => {
       {/* ETAPA 1 */}
       {etapa === 1 && (
         <>
-          <S.Title>
-            Confirmação de Presença
-          </S.Title>
+          <S.Title>Confirmação de Presença</S.Title>
 
           <S.SearchInput
             placeholder="Nome completo"
             value={nome}
-            onChange={(e) =>
-              setNome(e.target.value)
-            }
+            onChange={(e) => setNome(e.target.value)}
           />
 
           <S.SearchInput
             placeholder="Celular (WhatsApp)"
             value={celular}
             onChange={(e) => {
-              let v = e.target.value.replace(
-                /\D/g,
-                ''
-              )
+              let v = e.target.value.replace(/\D/g, '')
 
               // limite 11 dígitos
               if (v.length > 11) return
 
-              v = v.replace(
-                /^(\d{2})(\d)/g,
-                '($1) $2'
-              )
+              v = v.replace(/^(\d{2})(\d)/g, '($1) $2')
 
-              v = v.replace(
-                /(\d{5})(\d)/,
-                '$1-$2'
-              )
+              v = v.replace(/(\d{5})(\d)/, '$1-$2')
 
               setCelular(v)
             }}
@@ -201,28 +175,17 @@ const RSVP: React.FC = () => {
           <S.SubmitButton
             onClick={() => {
               if (!nome || !celular) {
-                alert(
-                  'Preencha todos os campos'
-                )
+                alert('Preencha todos os campos')
                 return
               }
 
-              if (
-                nome.trim().split(' ').length < 2
-              ) {
-                alert(
-                  'Digite nome e sobrenome'
-                )
+              if (nome.trim().split(' ').length < 2) {
+                alert('Digite nome e sobrenome')
                 return
               }
 
-              if (
-                celular.replace(/\D/g, '')
-                  .length < 10
-              ) {
-                alert(
-                  'Digite um celular válido'
-                )
+              if (celular.replace(/\D/g, '').length < 10) {
+                alert('Digite um celular válido')
                 return
               }
 
@@ -232,10 +195,7 @@ const RSVP: React.FC = () => {
             Continuar
           </S.SubmitButton>
 
-          <button
-            className="jump-link"
-            onClick={() => setEtapa(5)}
-          >
+          <button className="jump-link" onClick={() => setEtapa(5)}>
             Já confirmei / Preciso cancelar a presença
           </button>
         </>
@@ -244,21 +204,16 @@ const RSVP: React.FC = () => {
       {/* ETAPA 2 */}
       {etapa === 2 && (
         <S.StepBox>
-          <S.Title>
-            Olá, {nome}!
-          </S.Title>
+          <S.Title>Olá, {nome}!</S.Title>
 
           <S.Description>
             Obrigado por desejar festejar conosco!
             <br />
-            Deseja contribuir com nossa lua de
-            mel?
+            Deseja contribuir com nossa lua de mel?
           </S.Description>
 
           <S.ButtonGroup>
-            <S.SubmitButton
-              onClick={irParaPix}
-            >
+            <S.SubmitButton onClick={irParaPix}>
               Sim, quero contribuir 💚
             </S.SubmitButton>
 
@@ -278,27 +233,23 @@ const RSVP: React.FC = () => {
       {/* ETAPA 3 */}
       {etapa === 3 && (
         <S.StepBox>
-          <S.Title>
-            Lua de Mel ✈️
-          </S.Title>
+          <S.Title>Lua de Mel ✈️</S.Title>
+
+          <S.Description>
+            Obrigado por desejar fazer parte desse momento tão especial 💚
+            <br />
+            Sua contribuição nos ajudará a construir memórias incríveis na nossa
+            primeira viagem como casados.
+          </S.Description>
 
           <p>Escolha um valor:</p>
 
           <S.ValueGrid>
-            {[
-              'R$ 20',
-              'R$ 50',
-              'R$ 100',
-              'Outro'
-            ].map((v) => (
+            {['R$ 20', 'R$ 50', 'R$ 100', 'Outro'].map((v) => (
               <S.ValueCard
                 key={v}
-                $active={
-                  valorSelecionado === v
-                }
-                onClick={() =>
-                  setValorSelecionado(v)
-                }
+                $active={valorSelecionado === v}
+                onClick={() => setValorSelecionado(v)}
               >
                 {v}
               </S.ValueCard>
@@ -306,33 +257,21 @@ const RSVP: React.FC = () => {
           </S.ValueGrid>
 
           <S.QRBox>
-            <QRCodeSVG
-              value={pixPayload}
-              size={180}
-            />
+            <QRCodeSVG value={pixPayload} size={180} />
           </S.QRBox>
 
-          <S.CopyButton
-            onClick={copiarChave}
-          >
-            {copiado
-              ? '✅ Copiado!'
-              : '📋 Copiar Pix'}
+          <S.Description>
+            Após realizar o PIX, finalize sua confirmação abaixo 💚
+          </S.Description>
+
+          <S.CopyButton onClick={copiarChave}>
+            {copiado ? '✅ Copiado!' : '📋 Copiar Pix'}
           </S.CopyButton>
 
-          {copiado && (
-            <p>
-              Chave copiada com sucesso!
-            </p>
-          )}
+          {copiado && <p>Chave copiada com sucesso!</p>}
 
-          <S.SubmitButton
-            disabled={enviando}
-            onClick={finalizarComPix}
-          >
-            {enviando
-              ? 'Confirmando...'
-              : 'Confirmar presença'}
+          <S.SubmitButton disabled={enviando} onClick={finalizarComPix}>
+            {enviando ? 'Confirmando...' : 'Já realizei o PIX 💚'}
           </S.SubmitButton>
         </S.StepBox>
       )}
@@ -340,60 +279,59 @@ const RSVP: React.FC = () => {
       {/* ETAPA 4 */}
       {etapa === 4 && (
         <S.SuccessBox>
-          <h3>
-            🎉 Presença confirmada!
-          </h3>
+          {contribuiu ? (
+            <>
+              <h3>💚 Obrigado pelo carinho!</h3>
 
-          <p>
-            Obrigado, {nome}! 💚 Sua
-            presença foi confirmada com
-            sucesso. Estamos muito felizes
-            em ter você com a gente!
-          </p>
+              <p>
+                {nome}, sua presença já seria um presente enorme para nós.
+                <br />
+                <br />
+                Mas sua contribuição para nossa lua de mel tornou tudo ainda
+                mais especial ✨
+                <br />
+                <br />
+                Obrigado por fazer parte desse momento tão importante das nossas
+                vidas.
+              </p>
+            </>
+          ) : (
+            <>
+              <h3>🎉 Presença confirmada!</h3>
 
-          <S.SubmitButton
-            onClick={reiniciar}
-          >
-            Voltar ao início
-          </S.SubmitButton>
+              <p>
+                Obrigado, {nome}! 💚 Sua presença foi confirmada com sucesso.
+                Estamos muito felizes em ter você com a gente!
+              </p>
+            </>
+          )}
+
+          <S.SubmitButton onClick={reiniciar}>Voltar ao início</S.SubmitButton>
         </S.SuccessBox>
       )}
 
       {/* ETAPA 5 */}
       {etapa === 5 && (
         <S.StepBox>
-          <S.Title>
-            Cancelar presença
-          </S.Title>
+          <S.Title>Cancelar presença</S.Title>
 
           <S.SearchInput
             placeholder="Nome completo"
             value={nome}
-            onChange={(e) =>
-              setNome(e.target.value)
-            }
+            onChange={(e) => setNome(e.target.value)}
           />
 
           <S.SearchInput
             placeholder="Celular"
             value={celular}
             onChange={(e) => {
-              let v = e.target.value.replace(
-                /\D/g,
-                ''
-              )
+              let v = e.target.value.replace(/\D/g, '')
 
               if (v.length > 11) return
 
-              v = v.replace(
-                /^(\d{2})(\d)/g,
-                '($1) $2'
-              )
+              v = v.replace(/^(\d{2})(\d)/g, '($1) $2')
 
-              v = v.replace(
-                /(\d{5})(\d)/,
-                '$1-$2'
-              )
+              v = v.replace(/(\d{5})(\d)/, '$1-$2')
 
               setCelular(v)
             }}
@@ -402,32 +340,21 @@ const RSVP: React.FC = () => {
           <S.SubmitButton
             onClick={async () => {
               if (!nome || !celular) {
-                alert(
-                  'Preencha todos os campos'
-                )
+                alert('Preencha todos os campos')
                 return
               }
 
-              if (
-                nome.trim().split(' ').length < 2
-              ) {
-                alert(
-                  'Digite nome e sobrenome'
-                )
+              if (nome.trim().split(' ').length < 2) {
+                alert('Digite nome e sobrenome')
                 return
               }
 
-              if (
-                celular.replace(/\D/g, '')
-                  .length < 10
-              ) {
+              if (celular.replace(/\D/g, '').length < 10) {
                 alert('Celular inválido')
                 return
               }
 
-              await salvarPresenca(
-                'Cancelado'
-              )
+              await salvarPresenca('Cancelado')
 
               setEtapa(6)
             }}
@@ -440,21 +367,14 @@ const RSVP: React.FC = () => {
       {/* ETAPA 6 */}
       {etapa === 6 && (
         <S.SuccessBox>
-          <h3>
-            😢 Presença cancelada
-          </h3>
+          <h3>😢 Presença cancelada</h3>
 
           <p>
-            Entendemos, {nome}. Sentiremos
-            sua falta, mas esperamos te ver
-            em outra ocasião 💚
+            Entendemos, {nome}. Sentiremos sua falta, mas esperamos te ver em
+            outra ocasião 💚
           </p>
 
-          <S.SubmitButton
-            onClick={reiniciar}
-          >
-            Voltar ao início
-          </S.SubmitButton>
+          <S.SubmitButton onClick={reiniciar}>Voltar ao início</S.SubmitButton>
         </S.SuccessBox>
       )}
     </S.RSVPContainer>
