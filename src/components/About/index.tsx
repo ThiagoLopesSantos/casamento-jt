@@ -1,5 +1,5 @@
 import * as S from './styles'
-import jtPhoto from '../../assets/images/thiagoEjess.jpg'
+import jtPhoto from '../../assets/images/gallery/thiagoEjess.jpg'
 
 
 const About = () => (
