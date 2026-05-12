@@ -2,14 +2,14 @@ import { useState } from 'react'
 import * as S from './styles'
 
 import photo1 from '../../assets/images/gallery/thiagoEjess.jpg'
-import photo2 from '../../assets/images/gallery/thiagoEjess1.jpg'
-import photo3 from '../../assets/images/gallery/thiagoEjess2.jpg'
-import photo4 from '../../assets/images/gallery/thiagoEjess7.jpg'
-import photo5 from '../../assets/images/gallery/thiagoEjess4.jpg'
-import photo6 from '../../assets/images/gallery/thiagoEjess5.jpg'
-import photo7 from '../../assets/images/gallery/thiagoEjess6.jpg'
-import photo8 from '../../assets/images/gallery/thiagoEjess3.jpg'
-import photo9 from '../../assets/images/gallery/thiagoEjess8.jpg'
+import photo2 from '../../assets/images/gallery/thiagoEJess1.jpg'
+import photo3 from '../../assets/images/gallery/thiagoEJess2.jpg'
+import photo4 from '../../assets/images/gallery/thiagoEJess7.jpg'
+import photo5 from '../../assets/images/gallery/thiagoEJess4.jpg'
+import photo6 from '../../assets/images/gallery/thiagoEJess5.jpg'
+import photo7 from '../../assets/images/gallery/thiagoEJess6.jpg'
+import photo8 from '../../assets/images/gallery/thiagoEJess3.jpg'
+import photo9 from '../../assets/images/gallery/thiagoEJess8.jpg'
 
 type PhotoConfig = { src: string; wide?: boolean; tall?: boolean }
 
