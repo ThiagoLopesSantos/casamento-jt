@@ -7,12 +7,27 @@ const fadeIn = keyframes`
 `
 
 export const RSVPContainer = styled.section`
-  padding: 4rem 2rem;
+  padding: 2rem 2rem;
   background-color: ${theme.colors.background};
   display: flex;
   flex-direction: column;
   align-items: center;
   text-align: center;
+  gap: 15px;
+
+  .jump-link {
+      background: ${theme.colors.secondaryGreen};
+      border: none;
+      padding: 10px;
+      color: ${theme.colors.primaryGreen};
+      text-decoration: underline;
+      cursor: pointer;
+      font-size: 0.9rem;
+
+      &:hover {
+        opacity: 0.7;
+      }
+  }
 `
 
 export const Title = styled.h2`
@@ -32,13 +47,16 @@ export const Description = styled.p`
 export const SearchInput = styled.input`
   width: 100%;
   max-width: 400px;
-  padding: 15px 25px;
-  border-radius: 50px;
-  border: 2px solid ${theme.colors.secondaryGreen};
+  padding: 15px 20px;
+  border-radius: 12px;
+  border: 1.5px solid #ddd;
   font-size: 1rem;
   outline: none;
+  transition: all 0.2s;
+
   &:focus {
     border-color: ${theme.colors.primaryGreen};
+    box-shadow: 0 0 0 3px rgba(111, 125, 92, 0.15);
   }
 `
 
@@ -72,6 +90,13 @@ export const StepBox = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
+  background: white;
+  padding: 2rem;
+  gap: 15px;
+  border-radius: 20px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
+  width: 100%;
+  max-width: 420px;
 `
 
 export const ValueGrid = styled.div`
@@ -121,12 +146,19 @@ export const SubmitButton = styled.button`
   border-radius: 50px;
   font-weight: bold;
   cursor: pointer;
-  transition: 0.3s;
+  transition: 0.25s;
   width: 100%;
   max-width: 350px;
+  border: none;
+
   &:hover {
-    opacity: 0.9;
-    transform: scale(1.02);
+    transform: translateY(-2px);
+    box-shadow: 0 6px 18px rgba(0, 0, 0, 0.15);
+  }
+
+  &:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
   }
 `
 
@@ -137,12 +169,17 @@ export const ButtonGroup = styled.div`
   gap: 1rem;
   width: 100%;
   .jump-link {
-    background: ${theme.colors.secondaryGreen};
+    background: transparent;
     border: none;
-    padding: 12px 30px;
-    color: #888;
+    padding: 10px;
+    color: ${theme.colors.primaryGreen};
     text-decoration: underline;
     cursor: pointer;
+    font-size: 0.9rem;
+
+    &:hover {
+      opacity: 0.7;
+    }
   }
 `
 
@@ -150,7 +187,12 @@ export const SuccessBox = styled.div`
   animation: ${fadeIn} 0.6s ease;
   padding: 2rem;
   background: white;
+  gap: 15px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
   border-radius: 20px;
   border: 1px solid ${theme.colors.secondaryGreen};
   max-width: 400px;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.05);
 `

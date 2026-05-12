@@ -1,212 +1,462 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState } from 'react'
 import { QRCodeSVG } from 'qrcode.react'
-import { LISTA_CONVIDADOS } from '../../data/convidados'
-import type { Convidado } from '../../data/convidados'
 import * as S from './styles'
 
-const SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbyvi8GGdv3dfxRrEzSMxd8_luFXmmRRItO_2hZO8opqDE0EjHQC333xUdcNfV42YsqNuw/exec'
+const SCRIPT_URL =
+  'https://script.google.com/macros/s/AKfycbzS24gbfhzdeLxEvgqvwdk6Snbm6LQDeCsqI_VPc8w_hTI2car8omHFSbjEMZKuWmKO9g/exec'
+
 const CHAVE_PIX = '15470236781'
 const NOME_RECEBEDOR = 'THIAGO LOPES SANTOS'
 const CIDADE_RECEBEDOR = 'RIO DE JANEIRO'
 
 function crc16(data: string): string {
-  let crc = 0xFFFF
+  let crc = 0xffff
+
   for (let i = 0; i < data.length; i++) {
     crc ^= data.charCodeAt(i) << 8
+
     for (let j = 0; j < 8; j++) {
-      crc = (crc & 0x8000) !== 0 ? (crc << 1) ^ 0x1021 : crc << 1
+      crc =
+        (crc & 0x8000) !== 0
+          ? (crc << 1) ^ 0x1021
+          : crc << 1
     }
   }
-  return (crc & 0xFFFF).toString(16).toUpperCase().padStart(4, '0')
+
+  return (crc & 0xffff)
+    .toString(16)
+    .toUpperCase()
+    .padStart(4, '0')
 }
 
-function gerarPayloadPix(chave: string, valor: string, recebedor: string, cidade: string) {
-  const valorFormatado = parseFloat(valor.replace('R$ ', '').replace(',', '.')).toFixed(2)
-  const p_chave = `0014br.gov.bcb.pix01${chave.length.toString().padStart(2, '0')}${chave}`
+function gerarPayloadPix(
+  chave: string,
+  valor: string,
+  recebedor: string,
+  cidade: string
+) {
+  const valorFormatado = parseFloat(
+    valor.replace('R$ ', '').replace(',', '.')
+  ).toFixed(2)
+
+  const p_chave = `0014br.gov.bcb.pix01${chave.length
+    .toString()
+    .padStart(2, '0')}${chave}`
+
   const payloadBase = [
     '000201',
-    '26', p_chave.length.toString().padStart(2, '0'), p_chave,
-    '52040000', '5303986',
-    '54', valorFormatado.length.toString().padStart(2, '0'), valorFormatado,
+    '26',
+    p_chave.length.toString().padStart(2, '0'),
+    p_chave,
+    '52040000',
+    '5303986',
+    '54',
+    valorFormatado.length.toString().padStart(2, '0'),
+    valorFormatado,
     '5802BR',
-    '59', recebedor.length.toString().padStart(2, '0'), recebedor,
-    '60', cidade.length.toString().padStart(2, '0'), cidade,
-    '62070503***', '6304'
+    '59',
+    recebedor.length.toString().padStart(2, '0'),
+    recebedor,
+    '60',
+    cidade.length.toString().padStart(2, '0'),
+    cidade,
+    '62070503***',
+    '6304'
   ].join('')
+
   return payloadBase + crc16(payloadBase)
 }
 
 const RSVP: React.FC = () => {
-  const [etapa, setEtapa] = useState<1 | 2 | 3 | 4 | 5>(1)
-  const [busca, setBusca] = useState('')
-  const [resultados, setResultados] = useState<Convidado[]>([])
-  const [selecionado, setSelecionado] = useState<Convidado | null>(null)
-  const [jaConfirmado, setJaConfirmado] = useState(false)
-  const [valorSelecionado, setValorSelecionado] = useState('R$ 20')
+  const [etapa, setEtapa] =
+    useState<1 | 2 | 3 | 4 | 5 | 6>(1)
+
+  const [nome, setNome] = useState('')
+  const [celular, setCelular] = useState('')
+  const [valorSelecionado, setValorSelecionado] =
+    useState('R$ 20')
+
   const [copiado, setCopiado] = useState(false)
-  const [carregando, setCarregando] = useState(false)
+  const [contribuiu, setContribuiu] = useState(false)
+  const [enviando, setEnviando] = useState(false)
 
-  const pixPayload = valorSelecionado === 'Outro'
-    ? CHAVE_PIX
-    : gerarPayloadPix(CHAVE_PIX, valorSelecionado, NOME_RECEBEDOR, CIDADE_RECEBEDOR)
-
-  useEffect(() => {
-    if (busca.length > 2) {
-      const filtrados = LISTA_CONVIDADOS.filter((c) =>
-        c.nome.toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g, '').includes(
-          busca.toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g, '')
+  const pixPayload =
+    valorSelecionado === 'Outro'
+      ? CHAVE_PIX
+      : gerarPayloadPix(
+          CHAVE_PIX,
+          valorSelecionado,
+          NOME_RECEBEDOR,
+          CIDADE_RECEBEDOR
         )
-      )
-      setResultados(filtrados)
-    } else {
-      setResultados([])
-    }
-  }, [busca])
 
-  const verificarPresenca = async (convidado: Convidado) => {
-    setSelecionado(convidado)
-    setCarregando(true)
-    try {
-      const res = await fetch(`${SCRIPT_URL}?nome=${encodeURIComponent(convidado.nome)}`)
-      const json = await res.json()
-      setJaConfirmado(json.encontrado && json.presenca === 'Confirmado')
-    } catch {
-      setJaConfirmado(false)
-    } finally {
-      setCarregando(false)
-      setEtapa(2)
-    }
-  }
-
-  const salvarPresenca = async (presenca: 'Confirmado' | 'Cancelado') => {
-    if (!selecionado) return
+  const salvarPresenca = async (
+    presenca: 'Confirmado' | 'Cancelado'
+  ) => {
     const formData = new FormData()
-    formData.append('nome', selecionado.nome)
+
+    formData.append('nome', nome)
+    formData.append('celular', celular)
     formData.append('presenca', presenca)
-    fetch(SCRIPT_URL, { method: 'POST', body: formData, mode: 'no-cors' })
+    formData.append(
+      'contribuiu',
+      contribuiu ? 'Sim' : 'Não'
+    )
+
+    await fetch(SCRIPT_URL, {
+      method: 'POST',
+      body: formData,
+      mode: 'no-cors'
+    })
   }
 
-  const confirmarPresenca = async () => {
+  const confirmarSemPix = async () => {
+    setEnviando(true)
+
+    setContribuiu(false)
+
     await salvarPresenca('Confirmado')
+
     setEtapa(4)
+
+    setEnviando(false)
   }
 
-  const cancelarPresenca = async () => {
-    await salvarPresenca('Cancelado')
-    setEtapa(5)
+  const irParaPix = () => {
+    setContribuiu(true)
+    setEtapa(3)
   }
 
   const finalizarComPix = async () => {
+    setEnviando(true)
+
     await salvarPresenca('Confirmado')
+
     setEtapa(4)
+
+    setEnviando(false)
   }
 
   const copiarChave = () => {
     navigator.clipboard.writeText(pixPayload)
+
     setCopiado(true)
-    setTimeout(() => setCopiado(false), 2000)
+
+    setTimeout(() => {
+      setCopiado(false)
+    }, 2000)
   }
 
   const reiniciar = () => {
     setEtapa(1)
-    setBusca('')
-    setResultados([])
-    setSelecionado(null)
-    setJaConfirmado(false)
+    setNome('')
+    setCelular('')
     setValorSelecionado('R$ 20')
+    setContribuiu(false)
   }
 
   return (
     <S.RSVPContainer id="rsvp">
-
-      {/* ETAPA 1 — Busca */}
+      {/* ETAPA 1 */}
       {etapa === 1 && (
         <>
-          <S.Title>Confirmar Presença</S.Title>
-          <S.Description>Digite seu nome para confirmar sua presença no nosso grande dia.</S.Description>
+          <S.Title>
+            Confirmação de Presença
+          </S.Title>
+
           <S.SearchInput
-            placeholder="Ex: Aline Santiago"
-            value={busca}
-            onChange={(e) => setBusca(e.target.value)}
+            placeholder="Nome completo"
+            value={nome}
+            onChange={(e) =>
+              setNome(e.target.value)
+            }
           />
-          <S.ResultList>
-            {resultados.map((c) => (
-              <S.ResultItem
-                key={c.id}
-                $active={selecionado?.id === c.id}
-                onClick={() => !carregando && verificarPresenca(c)}
-              >
-                {carregando && selecionado?.id === c.id ? 'Verificando...' : c.nome}
-              </S.ResultItem>
-            ))}
-          </S.ResultList>
+
+          <S.SearchInput
+            placeholder="Celular (WhatsApp)"
+            value={celular}
+            onChange={(e) => {
+              let v = e.target.value.replace(
+                /\D/g,
+                ''
+              )
+
+              // limite 11 dígitos
+              if (v.length > 11) return
+
+              v = v.replace(
+                /^(\d{2})(\d)/g,
+                '($1) $2'
+              )
+
+              v = v.replace(
+                /(\d{5})(\d)/,
+                '$1-$2'
+              )
+
+              setCelular(v)
+            }}
+          />
+
+          <S.SubmitButton
+            onClick={() => {
+              if (!nome || !celular) {
+                alert(
+                  'Preencha todos os campos'
+                )
+                return
+              }
+
+              if (
+                nome.trim().split(' ').length < 2
+              ) {
+                alert(
+                  'Digite nome e sobrenome'
+                )
+                return
+              }
+
+              if (
+                celular.replace(/\D/g, '')
+                  .length < 10
+              ) {
+                alert(
+                  'Digite um celular válido'
+                )
+                return
+              }
+
+              setEtapa(2)
+            }}
+          >
+            Continuar
+          </S.SubmitButton>
+
+          <button
+            className="jump-link"
+            onClick={() => setEtapa(5)}
+          >
+            Já confirmei / Preciso cancelar a presença
+          </button>
         </>
       )}
 
-      {/* ETAPA 2 — Confirmar ou Cancelar */}
+      {/* ETAPA 2 */}
       {etapa === 2 && (
         <S.StepBox>
-          <S.Title>Olá, {selecionado?.nome}!</S.Title>
-          {jaConfirmado ? (
-            <>
-              <S.Description>Você já confirmou sua presença. Deseja cancelar?</S.Description>
-              <S.ButtonGroup>
-                <S.SubmitButton onClick={cancelarPresenca}>Cancelar minha presença</S.SubmitButton>
-                <button className="jump-link" onClick={reiniciar}>Voltar</button>
-              </S.ButtonGroup>
-            </>
-          ) : (
-            <>
-              <S.Description>Sua presença é muito importante! Gostaria de presentear os noivos com uma contribuição para a Lua de Mel?</S.Description>
-              <S.ButtonGroup>
-                <S.SubmitButton onClick={() => setEtapa(3)}>Sim, com certeza! 😍</S.SubmitButton>
-                <button className="jump-link" onClick={confirmarPresenca}>Sua presença já é nosso presente!</button>
-              </S.ButtonGroup>
-            </>
-          )}
+          <S.Title>
+            Olá, {nome}!
+          </S.Title>
+
+          <S.Description>
+            Obrigado por desejar festejar conosco!
+            <br />
+            Deseja contribuir com nossa lua de
+            mel?
+          </S.Description>
+
+          <S.ButtonGroup>
+            <S.SubmitButton
+              onClick={irParaPix}
+            >
+              Sim, quero contribuir 💚
+            </S.SubmitButton>
+
+            <button
+              className="jump-link"
+              disabled={enviando}
+              onClick={confirmarSemPix}
+            >
+              {enviando
+                ? 'Enviando...'
+                : 'Nosso presente é você! Apenas confirmar presença'}
+            </button>
+          </S.ButtonGroup>
         </S.StepBox>
       )}
 
-      {/* ETAPA 3 — Pix */}
+      {/* ETAPA 3 */}
       {etapa === 3 && (
         <S.StepBox>
-          <S.Title>Operação Lua de Mel ✈️</S.Title>
-          <p>Selecione um valor para gerar o QR Code:</p>
+          <S.Title>
+            Lua de Mel ✈️
+          </S.Title>
+
+          <p>Escolha um valor:</p>
+
           <S.ValueGrid>
-            {['R$ 20', 'R$ 50', 'R$ 100', 'Outro'].map((v) => (
-              <S.ValueCard key={v} $active={valorSelecionado === v} onClick={() => setValorSelecionado(v)}>
+            {[
+              'R$ 20',
+              'R$ 50',
+              'R$ 100',
+              'Outro'
+            ].map((v) => (
+              <S.ValueCard
+                key={v}
+                $active={
+                  valorSelecionado === v
+                }
+                onClick={() =>
+                  setValorSelecionado(v)
+                }
+              >
                 {v}
               </S.ValueCard>
             ))}
           </S.ValueGrid>
+
           <S.QRBox>
-            <QRCodeSVG value={pixPayload} size={180} fgColor="#6F7D5C" />
+            <QRCodeSVG
+              value={pixPayload}
+              size={180}
+            />
           </S.QRBox>
-          <S.CopyButton onClick={copiarChave}>
-            {copiado ? '✅ Código Copiado!' : '📋 Copiar Pix Copia e Cola'}
+
+          <S.CopyButton
+            onClick={copiarChave}
+          >
+            {copiado
+              ? '✅ Copiado!'
+              : '📋 Copiar Pix'}
           </S.CopyButton>
-          <S.SubmitButton onClick={finalizarComPix}>Concluir Confirmação</S.SubmitButton>
+
+          {copiado && (
+            <p>
+              Chave copiada com sucesso!
+            </p>
+          )}
+
+          <S.SubmitButton
+            disabled={enviando}
+            onClick={finalizarComPix}
+          >
+            {enviando
+              ? 'Confirmando...'
+              : 'Confirmar presença'}
+          </S.SubmitButton>
         </S.StepBox>
       )}
 
-      {/* ETAPA 4 — Sucesso com Pix */}
+      {/* ETAPA 4 */}
       {etapa === 4 && (
         <S.SuccessBox>
-          <h3>🎉 Tudo certo!</h3>
-          <p>Obrigado por confirmar e pelo carinho, {selecionado?.nome}. Nos vemos no altar!</p>
-          <S.SubmitButton onClick={reiniciar}>Voltar ao Início</S.SubmitButton>
+          <h3>
+            🎉 Presença confirmada!
+          </h3>
+
+          <p>
+            Obrigado, {nome}! 💚 Sua
+            presença foi confirmada com
+            sucesso. Estamos muito felizes
+            em ter você com a gente!
+          </p>
+
+          <S.SubmitButton
+            onClick={reiniciar}
+          >
+            Voltar ao início
+          </S.SubmitButton>
         </S.SuccessBox>
       )}
 
-      {/* ETAPA 5 — Presença cancelada */}
+      {/* ETAPA 5 */}
       {etapa === 5 && (
-        <S.SuccessBox>
-          <h3>😢 Que pena!</h3>
-          <p>Sua presença foi cancelada, {selecionado?.nome}. Esperamos te ver em outro momento!</p>
-          <S.SubmitButton onClick={reiniciar}>Voltar ao Início</S.SubmitButton>
-        </S.SuccessBox>
+        <S.StepBox>
+          <S.Title>
+            Cancelar presença
+          </S.Title>
+
+          <S.SearchInput
+            placeholder="Nome completo"
+            value={nome}
+            onChange={(e) =>
+              setNome(e.target.value)
+            }
+          />
+
+          <S.SearchInput
+            placeholder="Celular"
+            value={celular}
+            onChange={(e) => {
+              let v = e.target.value.replace(
+                /\D/g,
+                ''
+              )
+
+              if (v.length > 11) return
+
+              v = v.replace(
+                /^(\d{2})(\d)/g,
+                '($1) $2'
+              )
+
+              v = v.replace(
+                /(\d{5})(\d)/,
+                '$1-$2'
+              )
+
+              setCelular(v)
+            }}
+          />
+
+          <S.SubmitButton
+            onClick={async () => {
+              if (!nome || !celular) {
+                alert(
+                  'Preencha todos os campos'
+                )
+                return
+              }
+
+              if (
+                nome.trim().split(' ').length < 2
+              ) {
+                alert(
+                  'Digite nome e sobrenome'
+                )
+                return
+              }
+
+              if (
+                celular.replace(/\D/g, '')
+                  .length < 10
+              ) {
+                alert('Celular inválido')
+                return
+              }
+
+              await salvarPresenca(
+                'Cancelado'
+              )
+
+              setEtapa(6)
+            }}
+          >
+            Cancelar minha presença
+          </S.SubmitButton>
+        </S.StepBox>
       )}
 
+      {/* ETAPA 6 */}
+      {etapa === 6 && (
+        <S.SuccessBox>
+          <h3>
+            😢 Presença cancelada
+          </h3>
+
+          <p>
+            Entendemos, {nome}. Sentiremos
+            sua falta, mas esperamos te ver
+            em outra ocasião 💚
+          </p>
+
+          <S.SubmitButton
+            onClick={reiniciar}
+          >
+            Voltar ao início
+          </S.SubmitButton>
+        </S.SuccessBox>
+      )}
     </S.RSVPContainer>
   )
 }
