@@ -24,6 +24,20 @@ export const InfoGroup = styled.div`
     line-height: 1.5rem;
   }
 `
+export const LinkInstagram = styled.div`
+  margin-top: 1rem;
+
+  a {
+    color: ${theme.colors.primaryGreen};
+    text-decoration: none;
+    font-weight: bold;
+    font-size: 0.9rem;
+
+    &:hover {
+      text-decoration: underline;
+    }
+  }
+`
 
 export const BtnRouteContainer = styled.div`
   display: flex;
