@@ -2,127 +2,164 @@ import styled from 'styled-components'
 import { theme } from '../../styles/theme'
 
 export const GalleryContainer = styled.section`
-  padding: 5rem 2rem;
-  text-align: center;
-  max-width: 960px;
+  width: 100%;
+  max-width: 800px;
   margin: 0 auto;
+  padding: 0rem 2rem;
+`
+
+export const Header = styled.div`
+  text-align: center;
+  max-width: 680px;
+  margin: 0 auto 3.5rem;
+`
+
+export const SmallText = styled.p`
+  color: ${theme.colors.gold};
+  text-transform: uppercase;
+  letter-spacing: 5px;
+  font-size: 0.72rem;
+  margin-bottom: 1rem;
 `
 
 export const Title = styled.h2`
-  color: ${theme.colors.primaryGreen};
-  margin-bottom: 1rem;
-  font-size: 2.3rem;
+  font-size: 2rem;
+  line-height: 0.95;
+  margin-bottom: 1.5rem;
 `
 
 export const Subtitle = styled.p`
-  color: #777;
-  margin-bottom: 3rem;
+  color: ${theme.colors.mutedText};
   font-size: 1rem;
 `
 
-export const PhotoGrid = styled.div`
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  grid-auto-rows: 220px;
-  gap: 14px;
+export const Album = styled.div`
+  background: ${theme.colors.white};
+  border: 1px solid rgba(200, 155, 90, 0.22);
+  border-radius: 34px;
+  padding: 1.4rem;
+  box-shadow: 0 24px 60px rgba(62, 58, 53, 0.08);
+
+  @media (max-width: 768px) {
+    border-radius: 24px;
+    padding: 1rem;
+  }
+`
+
+export const MainPhotoWrapper = styled.div`
+  width: 100%;
+  height: 620px;
+  border-radius: 26px;
+  overflow: hidden;
+  background: ${theme.colors.softPink};
+
+  @media (max-width: 900px) {
+    height: 520px;
+  }
 
   @media (max-width: 600px) {
-    grid-template-columns: repeat(2, 1fr);
-    grid-auto-rows: 180px;
+    height: 380px;
+    border-radius: 18px;
   }
 `
 
-export const PhotoCard = styled.div<{ $wide?: boolean; $tall?: boolean }>`
-  position: relative;
-  overflow: hidden;
-  border-radius: 20px;
-  cursor: pointer;
-
-  grid-column: ${({ $wide }) => $wide ? 'span 2' : 'span 1'};
-  grid-row:    ${({ $tall }) => $tall ? 'span 2' : 'span 1'};
-
-  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.10);
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
-
-  &:hover {
-    transform: translateY(-4px);
-    box-shadow: 0 16px 36px rgba(0, 0, 0, 0.16);
-  }
-
-  &:hover img {
-    transform: scale(1.07);
-  }
-
-  &:hover > div {
-    opacity: 1;
-  }
-`
-
-export const PhotoItem = styled.img`
+export const MainPhoto = styled.img`
   width: 100%;
   height: 100%;
   object-fit: cover;
-  transition: transform 0.5s ease;
-  display: block;
-`
 
-export const PhotoOverlay = styled.div`
-  position: absolute;
-  inset: 0;
-  background: linear-gradient(
-    to top,
-    rgba(0, 0, 0, 0.45) 0%,
-    rgba(0, 0, 0, 0.10) 60%,
-    transparent 100%
-  );
-  display: flex;
-  align-items: flex-end;
-  justify-content: center;
-  padding-bottom: 1rem;
-  opacity: 0;
-  transition: opacity 0.3s ease;
+  transition:
+    opacity 0.8s ease,
+    transform 1.2s ease;
 
-  span {
-    color: white;
-    font-size: 0.9rem;
-    font-weight: 600;
-    letter-spacing: 0.03em;
-    text-shadow: 0 1px 4px rgba(0,0,0,0.4);
+  animation: smoothZoom 3s ease-in-out forwards;
+
+  @keyframes smoothZoom {
+    from {
+      transform: scale(1);
+    }
+
+    to {
+      transform: scale(1.04);
+    }
   }
 `
 
-export const Modal = styled.div`
-  position: fixed;
-  inset: 0;
-  background: rgba(0, 0, 0, 0.92);
+export const Controls = styled.div`
   display: flex;
   align-items: center;
   justify-content: center;
-  z-index: 999;
-  padding: 2rem;
+  gap: 1.4rem;
+  margin: 1.5rem 0;
 `
 
-export const ModalClose = styled.span`
-  position: absolute;
-  top: 1.5rem;
-  right: 2rem;
-  color: white;
-  font-size: 1.8rem;
-  cursor: pointer;
-  opacity: 0.7;
-  transition: opacity 0.2s;
-  &:hover { opacity: 1; }
+export const ArrowButton = styled.button`
+  width: 46px;
+  height: 46px;
+  border-radius: 50%;
+  background: ${theme.colors.background};
+  color: ${theme.colors.primaryGreen};
+  border: 1px solid rgba(200, 155, 90, 0.35);
+  font-size: 1.2rem;
+  transition: 0.3s ease;
+
+  &:hover {
+    background: ${theme.colors.fuchsia};
+    color: ${theme.colors.white};
+    transform: translateY(-2px);
+  }
 `
 
-export const ModalImage = styled.img`
-  max-width: 90%;
-  max-height: 90vh;
-  border-radius: 16px;
-  box-shadow: 0 20px 60px rgba(0,0,0,0.5);
-  animation: fadeIn 0.3s ease;
+export const Counter = styled.span`
+  color: ${theme.colors.gold};
+  font-size: 0.8rem;
+  letter-spacing: 4px;
+  font-weight: 600;
+`
 
-  @keyframes fadeIn {
-    from { opacity: 0; transform: scale(0.95); }
-    to   { opacity: 1; transform: scale(1); }
+export const ThumbnailList = styled.div`
+  display: flex;
+  gap: 0.8rem;
+  overflow-x: auto;
+  padding: 0.4rem 0.2rem 0.2rem;
+
+  &::-webkit-scrollbar {
+    height: 5px;
+  }
+
+  &::-webkit-scrollbar-thumb {
+    background: rgba(200, 155, 90, 0.45);
+    border-radius: 999px;
+  }
+`
+
+export const ThumbnailButton = styled.button<{ $active?: boolean }>`
+  flex: 0 0 88px;
+  height: 88px;
+  padding: 0;
+  border-radius: 18px;
+  overflow: hidden;
+  background: transparent;
+  border: 2px solid
+    ${({ $active }) =>
+      $active ? theme.colors.fuchsia : 'rgba(200, 155, 90, 0.25)'};
+  opacity: ${({ $active }) => ($active ? 1 : 0.62)};
+  transition: 0.3s ease;
+
+  img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+  &:hover {
+    opacity: 1;
+    transform: translateY(-2px);
+  }
+
+  @media (max-width: 600px) {
+    flex-basis: 70px;
+    height: 70px;
+    border-radius: 14px;
   }
 `

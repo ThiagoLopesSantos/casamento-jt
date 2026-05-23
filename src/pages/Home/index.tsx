@@ -1,19 +1,24 @@
 import ContentSection from '../../components/ContentSection'
 import Gallery from '../../components/Gallery'
 import Hero from '../../components/Hero'
-import RSVP from '../../components/RSVP'
-import SectionDivider from '../../components/SectionDivider'
+import RSVPGate from '../../components/RSVPGate'
+import Countdown from '../../components/Countdown'
+import Footer from '../../components/Footer'
 
 const Home = () => {
   return (
     <>
       <Hero />
-      <SectionDivider />
+
       <ContentSection />
-      <SectionDivider />
+
       <Gallery />
-      <SectionDivider />
-      <RSVP />
+
+
+      <RSVPGate />
+      <Countdown />
+
+      <Footer />
     </>
   )
 }

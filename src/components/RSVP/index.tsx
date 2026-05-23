@@ -143,11 +143,11 @@ const RSVP: React.FC = () => {
   }
 
   return (
-    <S.RSVPContainer id="rsvp">
+    <S.RSVPContainer className="reveal" id="rsvp">
       {/* ETAPA 1 */}
       {etapa === 1 && (
         <>
-          <S.Title>Confirmação de Presença</S.Title>
+          {/* <S.Title>Confirmação de Presença</S.Title> */}
 
           <S.SearchInput
             placeholder="Nome completo"
@@ -233,7 +233,7 @@ const RSVP: React.FC = () => {
       {/* ETAPA 3 */}
       {etapa === 3 && (
         <S.StepBox>
-          <S.Title>Lua de Mel ✈️</S.Title>
+          <S.Title>Presente para nossa lua de mel</S.Title>
 
           <S.Description>
             Obrigado por desejar fazer parte desse momento tão especial 💚
@@ -281,7 +281,7 @@ const RSVP: React.FC = () => {
         <S.SuccessBox>
           {contribuiu ? (
             <>
-              <h3>💚 Obrigado pelo carinho!</h3>
+              <h3>Presença confirmada</h3>
 
               <p>
                 {nome}, sua presença já seria um presente enorme para nós.
@@ -297,10 +297,10 @@ const RSVP: React.FC = () => {
             </>
           ) : (
             <>
-              <h3>🎉 Presença confirmada!</h3>
+              <h3>Presença confirmada!</h3>
 
               <p>
-                Obrigado, {nome}! 💚 Sua presença foi confirmada com sucesso.
+                Obrigado, {nome}!  Sua presença foi confirmada com sucesso.
                 Estamos muito felizes em ter você com a gente!
               </p>
             </>
@@ -367,7 +367,7 @@ const RSVP: React.FC = () => {
       {/* ETAPA 6 */}
       {etapa === 6 && (
         <S.SuccessBox>
-          <h3>😢 Presença cancelada</h3>
+          <h3>Presença cancelada</h3>
 
           <p>
             Entendemos, {nome}. Sentiremos sua falta, mas esperamos te ver em

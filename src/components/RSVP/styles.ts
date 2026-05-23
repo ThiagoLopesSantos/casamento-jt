@@ -2,164 +2,86 @@ import styled, { keyframes } from 'styled-components'
 import { theme } from '../../styles/theme'
 
 const fadeIn = keyframes`
-  from { opacity: 0; transform: translateY(15px); }
+  from { opacity: 0; transform: translateY(18px); }
   to { opacity: 1; transform: translateY(0); }
 `
 
 export const RSVPContainer = styled.section`
-  padding: 2rem 2rem;
-  background-color: ${theme.colors.background};
+  width: 100%;
+  padding: 7rem 2rem;
+  background: ${theme.colors.background};
   display: flex;
   flex-direction: column;
   align-items: center;
   text-align: center;
-  gap: 15px;
+  gap: 1rem;
 
   .jump-link {
-      background: ${theme.colors.secondaryGreen};
-      border: none;
-      padding: 10px;
-      color: ${theme.colors.primaryGreen};
-      text-decoration: underline;
-      cursor: pointer;
-      font-size: 0.9rem;
+    background: transparent;
+    color: ${theme.colors.primaryGreen};
+    text-decoration: underline;
+    font-size: 0.9rem;
+    padding: 0.8rem;
+    transition: 0.3s ease;
 
-      &:hover {
-        opacity: 0.7;
-      }
+    &:hover {
+      color: ${theme.colors.fuchsia};
+    }
   }
 `
 
 export const Title = styled.h2`
-  font-family: ${theme.fonts.title};
+  font-size: clamp(2.8rem, 6vw, 5rem);
+  line-height: 0.95;
   color: ${theme.colors.primaryGreen};
-  font-size: 2rem;
   margin-bottom: 1rem;
 `
 
 export const Description = styled.p`
-  color: #666;
-  max-width: 450px;
-  margin-bottom: 2rem;
-  line-height: 1.6;
+  color: ${theme.colors.mutedText};
+  max-width: 480px;
+  margin-bottom: 1.8rem;
+  line-height: 1.7;
 `
 
 export const SearchInput = styled.input`
   width: 100%;
-  max-width: 400px;
-  padding: 15px 20px;
-  border-radius: 12px;
-  border: 1.5px solid #ddd;
-  font-size: 1rem;
+  max-width: 420px;
+  padding: 16px 20px;
+  border-radius: 999px;
+  border: 1px solid rgba(200, 155, 90, 0.35);
+  background: ${theme.colors.white};
+  color: ${theme.colors.text};
+  font-size: 0.95rem;
   outline: none;
-  transition: all 0.2s;
+  font-family: ${theme.fonts.body};
+  transition: 0.25s ease;
+  margin-bottom: 0.8rem;
+
+  &::placeholder {
+    color: rgba(62, 58, 53, 0.45);
+  }
 
   &:focus {
-    border-color: ${theme.colors.primaryGreen};
-    box-shadow: 0 0 0 3px rgba(111, 125, 92, 0.15);
-  }
-`
-
-export const ResultList = styled.div`
-  width: 100%;
-  max-width: 400px;
-  margin-top: 1rem;
-  display: flex;
-  flex-direction: column;
-  gap: 10px;
-`
-
-export const ResultItem = styled.div<{ $active?: boolean }>`
-  padding: 15px;
-  background: ${(props) =>
-    props.$active ? theme.colors.primaryGreen : 'white'};
-  color: ${(props) => (props.$active ? 'white' : theme.colors.primaryGreen)};
-  border: 1px solid ${theme.colors.secondaryGreen};
-  border-radius: 12px;
-  cursor: pointer;
-  transition: all 0.2s;
-  &:hover {
-    transform: translateX(5px);
-    background: #f0f4eb;
-    color: ${theme.colors.primaryGreen};
+    border-color: ${theme.colors.fuchsia};
+    box-shadow: 0 0 0 4px rgba(184, 50, 93, 0.1);
   }
 `
 
 export const StepBox = styled.div`
-  animation: ${fadeIn} 0.5s ease;
+  animation: ${fadeIn} 0.45s ease;
+  width: 100%;
+  max-width: 520px;
+  background: ${theme.colors.white};
+  border: 1px solid rgba(200, 155, 90, 0.25);
+  border-radius: 34px;
+  padding: 3rem 2rem;
+  box-shadow: 0 24px 60px rgba(62, 58, 53, 0.08);
+
   display: flex;
   flex-direction: column;
   align-items: center;
-  background: white;
-  padding: 2rem;
-  gap: 15px;
-  border-radius: 20px;
-  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
-  width: 100%;
-  max-width: 420px;
-`
-
-export const ValueGrid = styled.div`
-  display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  gap: 12px;
-  margin: 1.5rem 0;
-  width: 100%;
-  max-width: 350px;
-`
-
-export const ValueCard = styled.div<{ $active?: boolean }>`
-  padding: 15px;
-  border: 2px solid
-    ${(props) => (props.$active ? theme.colors.primaryGreen : '#eee')};
-  background: ${(props) => (props.$active ? '#f0f4eb' : 'white')};
-  border-radius: 15px;
-  cursor: pointer;
-  font-weight: bold;
-  color: ${theme.colors.primaryGreen};
-  transition: all 0.2s;
-`
-
-export const QRBox = styled.div`
-  background: white;
-  padding: 15px;
-  border-radius: 20px;
-  border: 1px solid #ddd;
-  margin-bottom: 1rem;
-`
-
-export const CopyButton = styled.button`
-  background: #f8f9fa;
-  border: 1px dashed ${theme.colors.primaryGreen};
-  padding: 8px 15px;
-  border-radius: 8px;
-  color: ${theme.colors.primaryGreen};
-  cursor: pointer;
-  font-size: 0.85rem;
-  margin-bottom: 1.5rem;
-`
-
-export const SubmitButton = styled.button`
-  background: ${theme.colors.primaryGreen};
-  color: white;
-  padding: 15px 40px;
-  border-radius: 50px;
-  font-weight: bold;
-  cursor: pointer;
-  transition: 0.25s;
-  width: 100%;
-  max-width: 350px;
-  border: none;
-
-  &:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 6px 18px rgba(0, 0, 0, 0.15);
-  }
-
-  &:disabled {
-    opacity: 0.6;
-    cursor: not-allowed;
-  }
+  gap: 1rem;
 `
 
 export const ButtonGroup = styled.div`
@@ -168,31 +90,109 @@ export const ButtonGroup = styled.div`
   align-items: center;
   gap: 1rem;
   width: 100%;
-  .jump-link {
-    background: transparent;
-    border: none;
-    padding: 10px;
-    color: ${theme.colors.primaryGreen};
-    text-decoration: underline;
-    cursor: pointer;
-    font-size: 0.9rem;
+`
 
-    &:hover {
-      opacity: 0.7;
-    }
+export const SubmitButton = styled.button`
+  background: ${theme.colors.fuchsia};
+  color: ${theme.colors.white};
+  padding: 15px 34px;
+  border-radius: 999px;
+  font-weight: 600;
+  width: 100%;
+  max-width: 360px;
+  letter-spacing: 0.4px;
+  transition: 0.3s ease;
+
+  &:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 12px 28px rgba(184, 50, 93, 0.24);
+  }
+
+  &:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+  }
+`
+
+export const ValueGrid = styled.div`
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 0.9rem;
+  width: 100%;
+  max-width: 360px;
+  margin: 1rem 0;
+`
+
+export const ValueCard = styled.div<{ $active?: boolean }>`
+  padding: 1rem;
+  border-radius: 20px;
+  cursor: pointer;
+  font-weight: 600;
+  color: ${({ $active }) =>
+    $active ? theme.colors.white : theme.colors.primaryGreen};
+  background: ${({ $active }) =>
+    $active ? theme.colors.primaryGreen : theme.colors.background};
+  border: 1px solid
+    ${({ $active }) =>
+      $active ? theme.colors.primaryGreen : 'rgba(200, 155, 90, 0.25)'};
+  transition: 0.25s ease;
+
+  &:hover {
+    transform: translateY(-2px);
+    border-color: ${theme.colors.fuchsia};
+  }
+`
+
+export const QRBox = styled.div`
+  background: ${theme.colors.white};
+  padding: 1rem;
+  border-radius: 24px;
+  border: 1px solid rgba(200, 155, 90, 0.25);
+  box-shadow: 0 14px 35px rgba(62, 58, 53, 0.08);
+`
+
+export const CopyButton = styled.button`
+  background: ${theme.colors.background};
+  border: 1px dashed ${theme.colors.gold};
+  padding: 10px 18px;
+  border-radius: 999px;
+  color: ${theme.colors.primaryGreen};
+  font-size: 0.85rem;
+  transition: 0.25s ease;
+
+  &:hover {
+    color: ${theme.colors.fuchsia};
+    border-color: ${theme.colors.fuchsia};
   }
 `
 
 export const SuccessBox = styled.div`
-  animation: ${fadeIn} 0.6s ease;
-  padding: 2rem;
-  background: white;
-  gap: 15px;
+  animation: ${fadeIn} 0.5s ease;
+  width: 100%;
+  max-width: 520px;
+  padding: 3rem 2rem;
+  background: ${theme.colors.white};
+  border-radius: 34px;
+  border: 1px solid rgba(200, 155, 90, 0.28);
+  box-shadow: 0 24px 60px rgba(62, 58, 53, 0.08);
+
   display: flex;
   flex-direction: column;
   align-items: center;
-  border-radius: 20px;
-  border: 1px solid ${theme.colors.secondaryGreen};
-  max-width: 400px;
-  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.05);
+  gap: 1.2rem;
+
+  h3 {
+    font-size: 2.4rem;
+    color: ${theme.colors.primaryGreen};
+  }
+
+  p {
+    max-width: 440px;
+  }
 `
+
+export const ResultList = styled.div`
+  display: none;
+`
+
+export const ResultItem = styled.div<{ $active?: boolean }>``

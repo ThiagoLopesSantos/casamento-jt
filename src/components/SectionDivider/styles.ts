@@ -3,17 +3,55 @@ import { theme } from '../../styles/theme'
 
 export const DividerContainer = styled.div`
   display: flex;
-  justify-content: center;
   align-items: center;
-  padding: 2rem 0;
-`
-export const DividerImage = styled.img`
-  max-width: 50px;
-  max-height: 50px;
+  justify-content: center;
+
+  gap: 2rem;
+
+  margin: 7rem 0 4rem;
+
+  padding: 0 2rem;
+
+  @media (max-width: 768px) {
+    gap: 1rem;
+  }
 `
 
 export const Line = styled.div`
-  width: 40%;
-  height: 0.1px;
-  background: ${theme.colors.secondaryGreen};
+  flex: 1;
+  max-width: 180px;
+  height: 1px;
+
+  background: linear-gradient(
+    to right,
+    transparent,
+    ${theme.colors.gold},
+    transparent
+  );
+`
+
+export const Content = styled.div`
+  text-align: center;
+`
+
+export const Subtitle = styled.p`
+  color: ${theme.colors.gold};
+
+  text-transform: uppercase;
+
+  letter-spacing: 4px;
+
+  font-size: 0.72rem;
+
+  margin-bottom: 0.8rem;
+`
+
+export const Title = styled.h2`
+  font-family: ${theme.fonts.title};
+
+  font-size: clamp(2.5rem, 5vw, 4rem);
+
+  color: ${theme.colors.primaryGreen};
+
+  font-weight: 500;
 `

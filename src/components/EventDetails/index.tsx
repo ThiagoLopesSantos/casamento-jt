@@ -16,20 +16,28 @@ const EventDetails: React.FC = () => {
 
     const destino =
       'Casa das Pedras Festas e Eventos, Av. Gaspar de Lemos, 450 - Ilha de Guaratiba, Rio de Janeiro - RJ, 23020-110'
-    // URL oficial do Google Maps para direções
-    const url = `https://www.google.com/maps/dir/?api=1&origin=${encodeURIComponent(origem)}&destination=${encodeURIComponent(destino)}`
+
+    const url = `https://www.google.com/maps/dir/?api=1&origin=${encodeURIComponent(
+      origem
+    )}&destination=${encodeURIComponent(destino)}`
 
     window.open(url, '_blank')
   }
 
   return (
-    <S.DetailsContainer>
-      <S.InfoGroup>
-        <h2>Cerimônia & Recepção</h2>
+    <S.DetailsContainer className="reveal" id="cerimonia">
+      <S.Card>
+        <S.SmallText>O grande dia</S.SmallText>
 
-        <p>Sítio Casa das Pedras</p>
-        <p>Av. Gaspar de Lemos, 450</p>
-        <p>Ilha de Guaratiba - RJ</p>
+        <S.Title>Cerimônia & Recepção</S.Title>
+
+        <S.PlaceName>Sítio Casa das Pedras</S.PlaceName>
+
+        <S.Address>
+          Av. Gaspar de Lemos, 450
+          <br />
+          Ilha de Guaratiba - RJ
+        </S.Address>
 
         <S.LinkInstagram>
           <a
@@ -41,46 +49,56 @@ const EventDetails: React.FC = () => {
           </a>
         </S.LinkInstagram>
 
-        <S.InputRota
-          type="text"
-          placeholder="Digite sua localização..."
-          value={origem}
-          onChange={(e) => setOrigem(e.target.value)}
-        />
+        <S.RouteBox>
+          <S.InputRota
+            type="text"
+            placeholder="Digite sua localização..."
+            value={origem}
+            onChange={(e) => setOrigem(e.target.value)}
+          />
 
-        <S.BtnRouteContainer>
-          <S.Line></S.Line>
           <S.RouteButton onClick={tracarRota}>
-            <img src={localImage} alt="Local Image" /> Traçar Rota
+            <img src={localImage} alt="" />
+            Traçar Rota
           </S.RouteButton>
-          <S.Line></S.Line>
-        </S.BtnRouteContainer>
-      </S.InfoGroup>
+        </S.RouteBox>
+      </S.Card>
 
-      <S.InfoGroup>
-        <h2>Guia do Convidado</h2>
-        <S.GuideItem>
-          <img src={clock} alt="Local Image" />
-          <div>
-            <strong>Chegue Cedo!</strong>
-            <p>
-              Nosso momento começa às 14:30h! Chegue cedo para aproveitar ao
-              máximo.
-            </p>
-          </div>
-        </S.GuideItem>
+      <S.Card>
+        <S.SmallText>Informações</S.SmallText>
 
-        <S.GuideItem>
-          <img id="dress" src={dressCode} alt="Local Image" />
-          <div>
-            <strong>Traje Esporte Fino</strong>
-            <p>
-              O evento será ao ar livre, escolha roupas confortáveis e
-              elegantes.
-            </p>
-          </div>
-        </S.GuideItem>
-      </S.InfoGroup>
+        <S.Title>Guia do Convidado</S.Title>
+
+        <S.GuideList>
+          <S.GuideItem>
+            <S.IconCircle>
+              <img src={clock} alt="" />
+            </S.IconCircle>
+
+            <div>
+              <strong>Chegue cedo!</strong>
+              <p>
+                Nosso momento começa às 14:30h. Chegue com tranquilidade para
+                aproveitar cada detalhe.
+              </p>
+            </div>
+          </S.GuideItem>
+
+          <S.GuideItem>
+            <S.IconCircle>
+              <img src={dressCode} alt="" />
+            </S.IconCircle>
+
+            <div>
+              <strong>Traje esporte fino</strong>
+              <p>
+                O evento será ao ar livre. Escolha roupas confortáveis,
+                elegantes e leves.
+              </p>
+            </div>
+          </S.GuideItem>
+        </S.GuideList>
+      </S.Card>
     </S.DetailsContainer>
   )
 }

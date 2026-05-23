@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import * as S from './styles'
 
 import photo1 from '../../assets/images/gallery/thiagoEjess.jpg'
@@ -11,53 +11,79 @@ import photo7 from '../../assets/images/gallery/thiagoEJess6.jpg'
 import photo8 from '../../assets/images/gallery/thiagoEJess3.jpg'
 import photo9 from '../../assets/images/gallery/thiagoEJess8.jpg'
 
-type PhotoConfig = { src: string; wide?: boolean; tall?: boolean }
-
-const photos: PhotoConfig[] = [
-  { src: photo1, tall: true },   // 0 — alto (destaque)
-  { src: photo2 },               // 1
-  { src: photo3 },               // 2
-  { src: photo4, wide: true },   // 3 — largo
-  { src: photo5 },               // 4
-  { src: photo6 },               // 5
-  { src: photo7, tall: true },   // 6 — alto
-  { src: photo8 },               // 7
-  { src: photo9, wide: true },   // 8 — largo (última sozinha)
+const photos = [
+  photo1,
+  photo2,
+  photo3,
+  photo4,
+  photo5,
+  photo6,
+  photo7,
+  photo8,
+  photo9
 ]
 
 const Gallery = () => {
-  const [selectedPhoto, setSelectedPhoto] = useState<string | null>(null)
+  const [activeIndex, setActiveIndex] = useState(0)
+
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setActiveIndex((prev) => (prev + 1) % photos.length)
+    }, 4000)
+
+    return () => clearInterval(interval)
+  }, [])
+
+  const nextPhoto = () => {
+    setActiveIndex((prev) => (prev + 1) % photos.length)
+  }
+
+  const previousPhoto = () => {
+    setActiveIndex((prev) => (prev - 1 + photos.length) % photos.length)
+  }
 
   return (
-    <>
-      <S.GalleryContainer>
-        <S.Title>Nossos Momentos 💚</S.Title>
-        <S.Subtitle>Alguns pedacinhos da nossa história até aqui ✨</S.Subtitle>
+    <S.GalleryContainer id="galeria" className="reveal">
+      <S.Header>
+        <S.SmallText>Memórias</S.SmallText>
+        <S.Title>Nossos Momentos</S.Title>
+        <S.Subtitle>
+          Nosso olhar e nosso sorriso contam uma história de uma passado, um presente e um futuro cheio de amor que esta por vir. 
+        </S.Subtitle>
+      </S.Header>
 
-        <S.PhotoGrid>
+      <S.Album>
+        <S.MainPhotoWrapper>
+          <S.MainPhoto
+            src={photos[activeIndex]}
+            alt={`Momento ${activeIndex + 1}`}
+          />
+        </S.MainPhotoWrapper>
+
+        <S.Controls>
+          <S.ArrowButton onClick={previousPhoto}>←</S.ArrowButton>
+
+          <S.Counter>
+            {String(activeIndex + 1).padStart(2, '0')} /{' '}
+            {String(photos.length).padStart(2, '0')}
+          </S.Counter>
+
+          <S.ArrowButton onClick={nextPhoto}>→</S.ArrowButton>
+        </S.Controls>
+
+        <S.ThumbnailList>
           {photos.map((photo, index) => (
-            <S.PhotoCard
+            <S.ThumbnailButton
               key={index}
-              $wide={photo.wide}
-              $tall={photo.tall}
-              onClick={() => setSelectedPhoto(photo.src)}
+              $active={activeIndex === index}
+              onClick={() => setActiveIndex(index)}
             >
-              <S.PhotoItem src={photo.src} alt={`Momento ${index + 1}`} />
-              <S.PhotoOverlay>
-                <span>💚 Ver foto</span>
-              </S.PhotoOverlay>
-            </S.PhotoCard>
+              <img src={photo} alt={`Miniatura ${index + 1}`} />
+            </S.ThumbnailButton>
           ))}
-        </S.PhotoGrid>
-      </S.GalleryContainer>
-
-      {selectedPhoto && (
-        <S.Modal onClick={() => setSelectedPhoto(null)}>
-          <S.ModalClose>✕</S.ModalClose>
-          <S.ModalImage src={selectedPhoto} alt="Foto ampliada" />
-        </S.Modal>
-      )}
-    </>
+        </S.ThumbnailList>
+      </S.Album>
+    </S.GalleryContainer>
   )
 }
 

@@ -1,12 +1,28 @@
-import * as S from './styles';
-import divider from "../../assets/images/imageDivider.png";
+import * as S from './styles'
 
-const SectionDivider = () => (
-  <S.DividerContainer>
-    <S.Line></S.Line>
-    <S.DividerImage src={divider} alt="Monograma" />
-    <S.Line></S.Line>
-  </S.DividerContainer>
-);
+type Props = {
+  title: string
+  subtitle?: string
+}
+
+const SectionDivider = ({ title, subtitle }: Props) => {
+  return (
+    <S.DividerContainer>
+      <S.Line />
+
+      <S.Content>
+        {subtitle && (
+          <S.Subtitle>
+            {subtitle}
+          </S.Subtitle>
+        )}
+
+        <S.Title>{title}</S.Title>
+      </S.Content>
+
+      <S.Line />
+    </S.DividerContainer>
+  )
+}
 
 export default SectionDivider
