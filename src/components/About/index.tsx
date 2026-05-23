@@ -1,29 +1,28 @@
 import * as S from './styles'
-import aboutPhoto from '../../assets/images/gallery/thiagoEjess.jpg'
 
 const About = () => {
   return (
-    <S.AboutContainer className="reveal" id="sobre">
-      <S.TextContent>
-        <S.SmallText>Nossa história</S.SmallText>
+    <S.AboutContainer id="sobre" className="reveal">
+      <S.IconWrapper>
+        <span>❀</span>
+      </S.IconWrapper>
 
-        <S.Title>Do encontro ao nosso sim</S.Title>
+      <S.SectionLabel>Sobre Nós</S.SectionLabel>
 
-        <S.Description>
-          Deus escreveu nossa história de uma forma linda e especial. Cada
-          detalhe, cada conversa e cada momento nos trouxe até aqui.
-        </S.Description>
+      <S.Line />
 
-        <S.Description>
-          Agora estamos prestes a viver um dos dias mais importantes das nossas
-          vidas, e será uma alegria enorme compartilhar esse momento com pessoas
-          tão especiais.
-        </S.Description>
-      </S.TextContent>
+      <S.Text>
+        Nossa história começou em 11 de novembro de 2024, em uma simples
+        conversa que mudou tudo.
+        <br />
+        <br />
+        Entre mensagens e risadas, Deus foi unindo dois corações e escrevendo
+        uma linda história de amor.
+      </S.Text>
 
-      <S.ImageWrapper>
-        <S.Image src={aboutPhoto} alt="Thiago e Jéssica" />
-      </S.ImageWrapper>
+      <S.Button href="#galeria">
+        Conheça nossa história
+      </S.Button>
     </S.AboutContainer>
   )
 }

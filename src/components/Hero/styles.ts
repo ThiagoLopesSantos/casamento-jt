@@ -8,21 +8,21 @@ export const HeroContainer = styled.section`
 
 export const Banner = styled.div`
   width: 100%;
-  height: 42vh;
+  height: 56vh;
 
   background-image: url('/hero-tropical2.png');
   background-size: cover;
-  background-position: center 45%;
+  background-position: center 48%;
 
   @media (max-width: 768px) {
     height: 42vh;
-    margin-top: 68px;
+    margin-top: 58px;
   }
 `
 
 export const Content = styled.div`
   text-align: center;
-  padding: 1rem 0;
+  padding: 3.5rem 1.5rem 3rem;
   max-width: 900px;
   margin: 0 auto;
 `
@@ -31,51 +31,57 @@ export const SmallText = styled.p`
   color: ${theme.colors.gold};
   text-transform: uppercase;
   letter-spacing: 6px;
-  font-size: 0.8rem;
-  font-weight: bold;
+  font-size: 0.78rem;
   margin-bottom: 1rem;
 `
 
 export const Names = styled.h1`
   font-family: ${theme.fonts.cursive};
   color: ${theme.colors.primaryGreen};
-  font-size: clamp(4rem, 1vw, 0rem);
-  font-weight: 500;
-  line-height: 1.2;
+  font-size: clamp(4.5rem, 9vw, 7.8rem);
+  font-weight: 400;
+  line-height: 1;
 
   span {
     color: ${theme.colors.gold};
-    font-style: italic;
+    margin: 0 0.5rem;
+  }
+
+  @media (max-width: 600px) {
+    font-size: 4rem;
+  }
+`
+
+export const Divider = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 1rem;
+  margin: 1.4rem auto 1.4rem;
+  max-width: 460px;
+
+  &::before,
+  &::after {
+    content: '';
+    flex: 1;
+    height: 1px;
+    background: rgba(200, 155, 90, 0.5);
+  }
+
+  span {
+    color: ${theme.colors.gold};
+    font-size: 1.2rem;
   }
 `
 
 export const Date = styled.p`
-  margin-top: 1rem;
-  color: ${theme.colors.gold};
-  letter-spacing: 6px;
+  color: ${theme.colors.primaryGreen};
+  letter-spacing: 8px;
   font-size: 0.95rem;
   text-transform: uppercase;
-`
 
-export const Description = styled.p`
-  max-width: 520px;
-  margin: 0rem auto 2rem;
-  color: ${theme.colors.mutedText};
-`
-
-export const Button = styled.a`
-  display: inline-block;
-  background: ${theme.colors.fuchsia};
-  color: ${theme.colors.white};
-  padding: 14px 34px;
-  border-radius: 999px;
-  font-weight: 600;
-  font-size: 0.9rem;
-  letter-spacing: 1px;
-  transition: 0.3s ease;
-
-  &:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 8px 20px rgba(184, 50, 93, 0.25);
+  @media (max-width: 600px) {
+    letter-spacing: 4px;
+    font-size: 0.8rem;
   }
 `

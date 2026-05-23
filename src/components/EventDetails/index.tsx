@@ -1,9 +1,6 @@
 import { useState } from 'react'
-
 import * as S from './styles'
 import localImage from '../../assets/images/icons/localizationIcon.png'
-import clock from '../../assets/images/icons/timer.png'
-import dressCode from '../../assets/images/icons/dresscode.png'
 
 const EventDetails: React.FC = () => {
   const [origem, setOrigem] = useState('')
@@ -25,81 +22,47 @@ const EventDetails: React.FC = () => {
   }
 
   return (
-    <S.DetailsContainer className="reveal" id="cerimonia">
-      <S.Card>
-        <S.SmallText>O grande dia</S.SmallText>
+    <S.EventContainer id="cerimonia" className="reveal">
+      <S.IconWrapper>
+        <span>⌂</span>
+      </S.IconWrapper>
 
-        <S.Title>Cerimônia & Recepção</S.Title>
+      <S.SectionLabel>Cerimônia & Recepção</S.SectionLabel>
 
-        <S.PlaceName>Sítio Casa das Pedras</S.PlaceName>
+      <S.Line />
 
-        <S.Address>
-          Av. Gaspar de Lemos, 450
-          <br />
-          Ilha de Guaratiba - RJ
-        </S.Address>
+      <S.Place>Sítio Casa das Pedras</S.Place>
 
-        <S.LinkInstagram>
-          <a
-            href="https://www.instagram.com/casa_das_pedras_festas?utm_source=ig_web_button_share_sheet&igsh=ZDNlZDc0MzIxNw=="
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            ✨ Conheça nossa casa de festas
-          </a>
-        </S.LinkInstagram>
+      <S.Time>Cerimônia às 14:30</S.Time>
 
-        <S.RouteBox>
-          <S.InputRota
-            type="text"
-            placeholder="Digite sua localização..."
-            value={origem}
-            onChange={(e) => setOrigem(e.target.value)}
-          />
+      <S.Address>
+        Av. Gaspar de Lemos, 450
+        <br />
+        Ilha de Guaratiba - RJ
+      </S.Address>
 
-          <S.RouteButton onClick={tracarRota}>
-            <img src={localImage} alt="" />
-            Traçar Rota
-          </S.RouteButton>
-        </S.RouteBox>
-      </S.Card>
+      <S.InputRota
+        type="text"
+        placeholder="Digite sua localização..."
+        value={origem}
+        onChange={(e) => setOrigem(e.target.value)}
+      />
 
-      <S.Card>
-        <S.SmallText>Informações</S.SmallText>
+      <S.RouteButton onClick={tracarRota}>
+        <img src={localImage} alt="" />
+        Ver no mapa
+      </S.RouteButton>
 
-        <S.Title>Guia do Convidado</S.Title>
-
-        <S.GuideList>
-          <S.GuideItem>
-            <S.IconCircle>
-              <img src={clock} alt="" />
-            </S.IconCircle>
-
-            <div>
-              <strong>Chegue cedo!</strong>
-              <p>
-                Nosso momento começa às 14:30h. Chegue com tranquilidade para
-                aproveitar cada detalhe.
-              </p>
-            </div>
-          </S.GuideItem>
-
-          <S.GuideItem>
-            <S.IconCircle>
-              <img src={dressCode} alt="" />
-            </S.IconCircle>
-
-            <div>
-              <strong>Traje esporte fino</strong>
-              <p>
-                O evento será ao ar livre. Escolha roupas confortáveis,
-                elegantes e leves.
-              </p>
-            </div>
-          </S.GuideItem>
-        </S.GuideList>
-      </S.Card>
-    </S.DetailsContainer>
+      <S.LinkInstagram>
+        <a
+          href="https://www.instagram.com/casa_das_pedras_festas?utm_source=ig_web_button_share_sheet&igsh=ZDNlZDc0MzIxNw=="
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          ✨ Conheça nossa casa de festas
+        </a>
+      </S.LinkInstagram>
+    </S.EventContainer>
   )
 }
 

@@ -5,8 +5,19 @@ import * as S from './styles'
 const ContentSection = () => {
   return (
     <S.ContentWrapper>
-      <About />
-      <EventDetails />
+      <S.ContentGrid>
+        <S.Column>
+          <About />
+        </S.Column>
+
+        <S.Divider>
+          <span>❧</span>
+        </S.Divider>
+
+        <S.Column>
+          <EventDetails />
+        </S.Column>
+      </S.ContentGrid>
     </S.ContentWrapper>
   )
 }
