@@ -9,7 +9,7 @@ const Hero = () => {
         <S.SmallText>Com muito amor</S.SmallText>
 
         <S.Names>
-          Jéssica <span>E</span> Thiago
+          Jéssica <span>e</span> Thiago
         </S.Names>
 
         <S.Date>28 • NOVEMBRO • 2026</S.Date>

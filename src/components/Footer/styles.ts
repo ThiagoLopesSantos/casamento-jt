@@ -27,6 +27,8 @@ export const Monogram = styled.div`
 
 export const Names = styled.h2`
   color: ${theme.colors.primaryGreen};
+  font-family: ${theme.fonts.cursive};
+
 
   font-size: clamp(2.8rem, 6vw, 5rem);
 

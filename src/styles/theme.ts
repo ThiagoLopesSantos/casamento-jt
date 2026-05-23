@@ -43,7 +43,8 @@ export const theme = {
   fonts: {
     title: "'Cormorant Garamond', serif",
     body: "'Montserrat', sans-serif",
-    script: "'Great Vibes', cursive"
+    script: "'Great Vibes', cursive",
+    cursive: "'Rouge Script', cursive"
   }
 }
 

@@ -37,7 +37,7 @@ export const SmallText = styled.p`
 `
 
 export const Names = styled.h1`
-  font-family: ${theme.fonts.script};
+  font-family: ${theme.fonts.cursive};
   color: ${theme.colors.primaryGreen};
   font-size: clamp(4rem, 1vw, 0rem);
   font-weight: 500;
