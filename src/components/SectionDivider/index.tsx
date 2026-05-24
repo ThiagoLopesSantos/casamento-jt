@@ -7,18 +7,16 @@ type Props = {
 
 const SectionDivider = ({ title, subtitle }: Props) => {
   return (
-    <S.DividerContainer>
+    <S.DividerContainer className="reveal">
       <S.Line />
 
-      <S.Content>
-        {subtitle && (
-          <S.Subtitle>
-            {subtitle}
-          </S.Subtitle>
-        )}
+      <S.Center>
+        <S.Leaf>❧</S.Leaf>
+
+        {subtitle && <S.Subtitle>{subtitle}</S.Subtitle>}
 
         <S.Title>{title}</S.Title>
-      </S.Content>
+      </S.Center>
 
       <S.Line />
     </S.DividerContainer>

@@ -33,7 +33,7 @@ const EventDetails: React.FC = () => {
 
       <S.Place>Sítio Casa das Pedras</S.Place>
 
-      <S.Time>Cerimônia às 14:30</S.Time>
+      <S.Time>Cerimônia às 15:00</S.Time>
 
       <S.Address>
         Av. Gaspar de Lemos, 450

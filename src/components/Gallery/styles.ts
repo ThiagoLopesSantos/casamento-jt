@@ -3,15 +3,18 @@ import { theme } from '../../styles/theme'
 
 export const GalleryContainer = styled.section`
   width: 100%;
-  max-width: 800px;
-  margin: 0 auto;
-  padding: 0rem 2rem;
+  padding: 2rem 2rem 6rem;
+  background: ${theme.colors.background};
+
+  @media (max-width: 768px) {
+    padding: 1rem 1.25rem 5rem;
+  }
 `
 
 export const Header = styled.div`
   text-align: center;
   max-width: 680px;
-  margin: 0 auto 3.5rem;
+  margin: 0 auto 2.5rem;
 `
 
 export const SmallText = styled.p`
@@ -23,108 +26,107 @@ export const SmallText = styled.p`
 `
 
 export const Title = styled.h2`
-  font-size: 2rem;
+  font-size: clamp(3rem, 6vw, 5.2rem);
   line-height: 0.95;
-  margin-bottom: 1.5rem;
+  margin-bottom: 1.3rem;
 `
 
 export const Subtitle = styled.p`
   color: ${theme.colors.mutedText};
-  font-size: 1rem;
+  font-size: 0.95rem;
 `
 
 export const Album = styled.div`
-  background: ${theme.colors.white};
-  border: 1px solid rgba(200, 155, 90, 0.22);
-  border-radius: 34px;
-  padding: 1.4rem;
-  box-shadow: 0 24px 60px rgba(62, 58, 53, 0.08);
-
-  @media (max-width: 768px) {
-    border-radius: 24px;
-    padding: 1rem;
-  }
+  width: 100%;
+  max-width: 980px;
+  margin: 0 auto;
 `
 
 export const MainPhotoWrapper = styled.div`
+  position: relative;
   width: 100%;
-  height: 620px;
-  border-radius: 26px;
+  height: clamp(360px, 58vh, 560px);
   overflow: hidden;
-  background: ${theme.colors.softPink};
+  background: ${theme.colors.background};
 
-  @media (max-width: 900px) {
-    height: 520px;
-  }
+  display: flex;
+  align-items: center;
+  justify-content: center;
+`
 
-  @media (max-width: 600px) {
-    height: 380px;
-    border-radius: 18px;
-  }
+export const BlurBackground = styled.img`
+  position: absolute;
+  inset: 0;
+
+  width: 100%;
+  height: 100%;
+
+  object-fit: cover;
+
+  filter: blur(26px);
+  transform: scale(1.14);
+  opacity: 0.38;
 `
 
 export const MainPhoto = styled.img`
+  position: relative;
+  z-index: 1;
+
   width: 100%;
   height: 100%;
-  object-fit: cover;
 
-  transition:
-    opacity 0.8s ease,
-    transform 1.2s ease;
-
-  animation: smoothZoom 3s ease-in-out forwards;
-
-  @keyframes smoothZoom {
-    from {
-      transform: scale(1);
-    }
-
-    to {
-      transform: scale(1.04);
-    }
-  }
+  object-fit: contain;
 `
 
 export const Controls = styled.div`
   display: flex;
   align-items: center;
   justify-content: center;
-  gap: 1.4rem;
-  margin: 1.5rem 0;
+
+  gap: 1.2rem;
+  margin: 1.5rem 0 1.2rem;
 `
 
 export const ArrowButton = styled.button`
-  width: 46px;
-  height: 46px;
+  width: 42px;
+  height: 42px;
+
   border-radius: 50%;
-  background: ${theme.colors.background};
+
+  background: transparent;
   color: ${theme.colors.primaryGreen};
-  border: 1px solid rgba(200, 155, 90, 0.35);
-  font-size: 1.2rem;
+
+  border: 1px solid rgba(200, 155, 90, 0.45);
+
+  font-size: 1.1rem;
+
   transition: 0.3s ease;
 
   &:hover {
     background: ${theme.colors.fuchsia};
     color: ${theme.colors.white};
-    transform: translateY(-2px);
+    border-color: ${theme.colors.fuchsia};
   }
 `
 
 export const Counter = styled.span`
   color: ${theme.colors.gold};
-  font-size: 0.8rem;
+  font-size: 0.78rem;
   letter-spacing: 4px;
   font-weight: 600;
 `
 
 export const ThumbnailList = styled.div`
   display: flex;
-  gap: 0.8rem;
+  justify-content: center;
+  gap: 0.65rem;
+
   overflow-x: auto;
-  padding: 0.4rem 0.2rem 0.2rem;
+
+  padding: 0.5rem 0.2rem;
 
   &::-webkit-scrollbar {
-    height: 5px;
+    height: 4px;
   }
 
   &::-webkit-scrollbar-thumb {
@@ -134,16 +136,19 @@ export const ThumbnailList = styled.div`
 `
 
 export const ThumbnailButton = styled.button<{ $active?: boolean }>`
-  flex: 0 0 88px;
-  height: 88px;
+  flex: 0 0 68px;
+  height: 68px;
+
   padding: 0;
-  border-radius: 18px;
+  border-radius: 2px;
   overflow: hidden;
   background: transparent;
-  border: 2px solid
+
+  border: 1px solid
     ${({ $active }) =>
-      $active ? theme.colors.fuchsia : 'rgba(200, 155, 90, 0.25)'};
-  opacity: ${({ $active }) => ($active ? 1 : 0.62)};
+      $active ? theme.colors.fuchsia : 'rgba(200, 155, 90, 0.3)'};
+
+  opacity: ${({ $active }) => ($active ? 1 : 0.52)};
   transition: 0.3s ease;
 
   img {
@@ -158,8 +163,7 @@ export const ThumbnailButton = styled.button<{ $active?: boolean }>`
   }
 
   @media (max-width: 600px) {
-    flex-basis: 70px;
-    height: 70px;
-    border-radius: 14px;
+    flex-basis: 58px;
+    height: 58px;
   }
 `

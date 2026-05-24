@@ -12,20 +12,26 @@ const RSVPGate = () => {
   }
 
   return (
-    <S.WaitingContainer className="reveal" id="rsvp">
-      <S.SmallText>Confirmação de presença</S.SmallText>
+    <S.WaitingContainer id="rsvp" className="reveal">
+      <S.Card>
+        <S.SmallText>Confirmação de presença</S.SmallText>
 
-      <S.Title>Em breve</S.Title>
+        <S.Title>Em breve</S.Title>
 
-      <S.Message>
-        As confirmações de presença serão abertas oficialmente em setembro de
-        2026.
-      </S.Message>
+        <S.Divider>
+          <span>❧</span>
+        </S.Divider>
 
-      <S.Note>
-        Por enquanto, guarde essa data com carinho. Será uma alegria viver esse
-        momento com você 💚
-      </S.Note>
+        <S.Message>
+          As confirmações de presença serão abertas oficialmente em setembro de
+          2026.
+        </S.Message>
+
+        <S.Note>
+          Por enquanto, guarde essa data com carinho. Será uma alegria viver
+          esse momento com você 💚
+        </S.Note>
+      </S.Card>
     </S.WaitingContainer>
   )
 }

@@ -7,7 +7,9 @@ export const AboutContainer = styled.div`
   align-items: center;
   text-align: center;
 
-  max-width: 420px;
+  max-width: 440px;
+  min-height: 430px;
+  justify-content: flex-start;
 `
 
 export const IconWrapper = styled.div`
@@ -48,34 +50,6 @@ export const Line = styled.div`
 
 export const Text = styled.p`
   color: ${theme.colors.mutedText};
-
   line-height: 2;
-
   font-size: 0.95rem;
-
-  margin-bottom: 2.5rem;
-`
-
-export const Button = styled.a`
-  border: 1px solid rgba(95, 107, 74, 0.45);
-
-  padding: 14px 34px;
-
-  border-radius: 2px;
-
-  font-size: 0.78rem;
-
-  letter-spacing: 2px;
-
-  text-transform: uppercase;
-
-  color: ${theme.colors.primaryGreen};
-
-  transition: 0.3s ease;
-
-  &:hover {
-    background: ${theme.colors.fuchsia};
-    border-color: ${theme.colors.fuchsia};
-    color: white;
-  }
 `

@@ -12,17 +12,14 @@ const About = () => {
       <S.Line />
 
       <S.Text>
-        Nossa história começou em 11 de novembro de 2024, em uma simples
-        conversa que mudou tudo.
+        Deus escreveu nossa história de uma forma linda e especial. Cada
+        detalhe, cada conversa e cada momento nos trouxe até aqui.
         <br />
         <br />
-        Entre mensagens e risadas, Deus foi unindo dois corações e escrevendo
-        uma linda história de amor.
+        Agora estamos prestes a viver um dos dias mais importantes das nossas
+        vidas, e será uma alegria enorme compartilhar esse momento com pessoas
+        tão especiais.
       </S.Text>
-
-      <S.Button href="#galeria">
-        Conheça nossa história
-      </S.Button>
     </S.AboutContainer>
   )
 }

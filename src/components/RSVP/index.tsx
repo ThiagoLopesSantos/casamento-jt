@@ -146,8 +146,8 @@ const RSVP: React.FC = () => {
     <S.RSVPContainer className="reveal" id="rsvp">
       {/* ETAPA 1 */}
       {etapa === 1 && (
-        <>
-          {/* <S.Title>Confirmação de Presença</S.Title> */}
+        <S.StepBox>
+          <S.Title>Confirmação de Presença</S.Title>
 
           <S.SearchInput
             placeholder="Nome completo"
@@ -198,7 +198,7 @@ const RSVP: React.FC = () => {
           <button className="jump-link" onClick={() => setEtapa(5)}>
             Já confirmei / Preciso cancelar a presença
           </button>
-        </>
+        </S.StepBox>
       )}
 
       {/* ETAPA 2 */}
@@ -300,7 +300,7 @@ const RSVP: React.FC = () => {
               <h3>Presença confirmada!</h3>
 
               <p>
-                Obrigado, {nome}!  Sua presença foi confirmada com sucesso.
+                Obrigado, {nome}! Sua presença foi confirmada com sucesso.
                 Estamos muito felizes em ter você com a gente!
               </p>
             </>

@@ -4,7 +4,7 @@ import { theme } from '../../styles/theme'
 export const ContentWrapper = styled.section`
   width: 100%;
   background: ${theme.colors.background};
-  padding: 6rem 2rem;
+  padding: 1rem 2rem;
 `
 
 export const ContentGrid = styled.div`
@@ -26,7 +26,7 @@ export const ContentGrid = styled.div`
 export const Column = styled.div`
   display: flex;
   justify-content: center;
-  align-items: center;
+  align-items: flex-start;
 `
 
 export const Divider = styled.div`

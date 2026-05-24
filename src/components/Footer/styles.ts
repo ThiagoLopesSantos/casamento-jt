@@ -3,7 +3,7 @@ import { theme } from '../../styles/theme'
 
 export const FooterContainer = styled.footer`
   width: 100%;
-  padding: 6rem 2rem;
+  padding: 1rem 2rem;
 
   text-align: center;
 
@@ -26,15 +26,19 @@ export const Monogram = styled.div`
 `
 
 export const Names = styled.h2`
+  font-family: ${theme.fonts.script};
   color: ${theme.colors.primaryGreen};
-  font-family: ${theme.fonts.cursive};
-
-
-  font-size: clamp(2.8rem, 6vw, 5rem);
-
+  font-size: clamp(1rem, 9vw, 7.8rem);
   line-height: 1;
 
-  margin-bottom: 1rem;
+  span {
+    color: ${theme.colors.gold};
+    margin: 0 0.5rem;
+  }
+
+  @media (max-width: 600px) {
+    font-size: 4rem;
+  }
 `
 
 export const Date = styled.p`

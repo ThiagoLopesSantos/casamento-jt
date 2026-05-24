@@ -48,12 +48,15 @@ const Gallery = () => {
         <S.SmallText>Memórias</S.SmallText>
         <S.Title>Nossos Momentos</S.Title>
         <S.Subtitle>
-          Nosso olhar e nosso sorriso contam uma história de uma passado, um presente e um futuro cheio de amor que esta por vir. 
+          Nosso olhar e nosso sorriso contam uma história de uma passado, um
+          presente e um futuro cheio de amor que esta por vir.
         </S.Subtitle>
       </S.Header>
 
       <S.Album>
         <S.MainPhotoWrapper>
+          <S.BlurBackground src={photos[activeIndex]} alt="" />
+
           <S.MainPhoto
             src={photos[activeIndex]}
             alt={`Momento ${activeIndex + 1}`}

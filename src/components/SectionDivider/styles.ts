@@ -2,56 +2,45 @@ import styled from 'styled-components'
 import { theme } from '../../styles/theme'
 
 export const DividerContainer = styled.div`
-  display: flex;
-  align-items: center;
-  justify-content: center;
+  width: 100%;
+  max-width: 900px;
 
-  gap: 2rem;
-
-  margin: 7rem 0 4rem;
-
+  margin: 5rem auto 3rem;
   padding: 0 2rem;
 
-  @media (max-width: 768px) {
-    gap: 1rem;
-  }
+  display: grid;
+  grid-template-columns: 1fr auto 1fr;
+  align-items: center;
+  gap: 1.5rem;
 `
 
 export const Line = styled.div`
-  flex: 1;
-  max-width: 180px;
   height: 1px;
-
-  background: linear-gradient(
-    to right,
-    transparent,
-    ${theme.colors.gold},
-    transparent
-  );
+  background: rgba(200, 155, 90, 0.45);
 `
 
-export const Content = styled.div`
+export const Center = styled.div`
   text-align: center;
+  min-width: 220px;
+`
+
+export const Leaf = styled.div`
+  color: ${theme.colors.gold};
+  font-size: 1.5rem;
+  line-height: 1;
+  margin-bottom: 0.7rem;
 `
 
 export const Subtitle = styled.p`
   color: ${theme.colors.gold};
-
   text-transform: uppercase;
-
   letter-spacing: 4px;
-
-  font-size: 0.72rem;
-
-  margin-bottom: 0.8rem;
+  font-size: 0.68rem;
+  margin-bottom: 0.5rem;
 `
 
 export const Title = styled.h2`
-  font-family: ${theme.fonts.title};
-
-  font-size: clamp(2.5rem, 5vw, 4rem);
-
+  font-size: clamp(2.3rem, 5vw, 4rem);
+  line-height: 1;
   color: ${theme.colors.primaryGreen};
-
-  font-weight: 500;
 `

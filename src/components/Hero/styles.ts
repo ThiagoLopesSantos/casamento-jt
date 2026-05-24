@@ -36,10 +36,9 @@ export const SmallText = styled.p`
 `
 
 export const Names = styled.h1`
-  font-family: ${theme.fonts.cursive};
+  font-family: ${theme.fonts.script};
   color: ${theme.colors.primaryGreen};
-  font-size: clamp(4.5rem, 9vw, 7.8rem);
-  font-weight: 400;
+  font-size: clamp(1rem, 9vw, 7rem);
   line-height: 1;
 
   span {
@@ -75,7 +74,7 @@ export const Divider = styled.div`
 `
 
 export const Date = styled.p`
-  color: ${theme.colors.primaryGreen};
+  color: ${theme.colors.fuchsia};
   letter-spacing: 8px;
   font-size: 0.95rem;
   text-transform: uppercase;
