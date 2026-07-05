@@ -1,27 +1,16 @@
 import { useEffect, useState } from 'react'
 import * as S from './styles'
 
-import photo1 from '../../assets/images/gallery/thiagoEjess.jpg'
-import photo2 from '../../assets/images/gallery/thiagoEJess1.jpg'
-import photo3 from '../../assets/images/gallery/thiagoEJess2.jpg'
-import photo4 from '../../assets/images/gallery/thiagoEJess7.jpg'
-import photo5 from '../../assets/images/gallery/thiagoEJess4.jpg'
-import photo6 from '../../assets/images/gallery/thiagoEJess5.jpg'
-import photo7 from '../../assets/images/gallery/thiagoEJess6.jpg'
-import photo8 from '../../assets/images/gallery/thiagoEJess3.jpg'
-import photo9 from '../../assets/images/gallery/thiagoEJess8.jpg'
+// Importa automaticamente todas as imagens da pasta gallery
+const images = import.meta.glob(
+  '../../assets/images/gallery/*.{png,jpg,jpeg,webp}',
+  {
+    eager: true,
+    import: 'default'
+  }
+)
 
-const photos = [
-  photo1,
-  photo2,
-  photo3,
-  photo4,
-  photo5,
-  photo6,
-  photo7,
-  photo8,
-  photo9
-]
+const photos = Object.values(images)
 
 const Gallery = () => {
   const [activeIndex, setActiveIndex] = useState(0)
@@ -47,9 +36,10 @@ const Gallery = () => {
       <S.Header>
         <S.SmallText>Memórias</S.SmallText>
         <S.Title>Nossos Momentos</S.Title>
+
         <S.Subtitle>
-          Nosso olhar e nosso sorriso contam uma história de uma passado, um
-          presente e um futuro cheio de amor que esta por vir.
+          Nosso olhar e nosso sorriso contam uma história de um passado, um
+          presente e um futuro cheio de amor que está por vir.
         </S.Subtitle>
       </S.Header>
 
