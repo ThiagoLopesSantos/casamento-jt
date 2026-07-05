@@ -1,16 +1,12 @@
 import { useEffect, useState } from 'react'
 import * as S from './styles'
 
-// Importa automaticamente todas as imagens da pasta gallery
-const images = import.meta.glob(
-  '../../assets/images/gallery/*.{png,jpg,jpeg,webp}',
-  {
+const photos = Object.values(
+  import.meta.glob('../../assets/images/gallery/*.{png,jpg,jpeg,webp}', {
     eager: true,
     import: 'default'
-  }
-)
-
-const photos = Object.values(images)
+  })
+) as string[]
 
 const Gallery = () => {
   const [activeIndex, setActiveIndex] = useState(0)
@@ -35,11 +31,12 @@ const Gallery = () => {
     <S.GalleryContainer id="galeria" className="reveal">
       <S.Header>
         <S.SmallText>Memórias</S.SmallText>
+
         <S.Title>Nossos Momentos</S.Title>
 
         <S.Subtitle>
-          Nosso olhar e nosso sorriso contam uma história de um passado, um
-          presente e um futuro cheio de amor que está por vir.
+          Nosso olhar e nosso sorriso contam uma história de um passado,
+          um presente e um futuro cheio de amor que está por vir.
         </S.Subtitle>
       </S.Header>
 
