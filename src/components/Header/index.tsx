@@ -37,7 +37,7 @@ const Header = () => {
           </li>
 
           <li>
-            <a href="#galeria">Lista de Presentes</a>
+            <a href="#galeria">Galeria</a>
           </li>
 
           <li>
